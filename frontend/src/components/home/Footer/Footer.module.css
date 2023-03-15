@@ -38,17 +38,31 @@
   gap: 0.5rem;
 }
 
+.about {
+  gap: 2rem;
+}
+
 .grid {
   padding-block: 3rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .container nav {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+}
+
+.socials {
+  display: flex;
+  justify-content: space-between;
+}
+
+.socials .icon {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 /* Enable hover only on non-touch devices */
@@ -60,6 +74,10 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding-inline: 1.25rem;
+  }
+
   .container .grid {
     grid-template-columns: 1fr;
     gap: 5rem;

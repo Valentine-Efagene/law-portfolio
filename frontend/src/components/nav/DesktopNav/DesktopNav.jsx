@@ -24,8 +24,11 @@ export default function DesktopNav({ className }) {
         />
       </Link>
       <div className={styles.navItemsWrapper}>
-        <NavLink href="/chat" className={styles.navButton}>
-          Chat
+        <NavLink href="/" className={styles.navButton}>
+          Home
+        </NavLink>
+        <NavLink href="http://localhost:3333/" className={styles.navButton}>
+          Blog
         </NavLink>
         <NavLink href="/users" className={styles.navButton}>
           Contacts

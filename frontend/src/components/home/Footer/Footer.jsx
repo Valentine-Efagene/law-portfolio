@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./Footer.module.css";
 
-import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import { string } from "prop-types";
 import Link from "next/link";
 import Image from "@/components/common/Image";
+import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
+import { FaFacebook, FaGoogle, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -31,6 +32,20 @@ export default function Footer({ className }) {
               src="https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Default-Logo.png"
             />
           </Link>
+          <div className={styles.socials}>
+            <a href="">
+              <FaFacebook className={styles.icon} />
+            </a>
+            <a href="">
+              <FaInstagram className={styles.icon} />
+            </a>
+            <a href="">
+              <FaWhatsapp className={styles.icon} />
+            </a>
+            <a href="">
+              <FaGoogle className={styles.icon} />
+            </a>
+          </div>
         </div>
         <div className={styles.links}>
           <h3 className={`${playfairDisplay.className}`}>Important Links</h3>
@@ -39,7 +54,7 @@ export default function Footer({ className }) {
             <a href="">About Us</a>
             <a href="">Attorneys</a>
             <a href="">Careers</a>
-            <a href="">Blog</a>
+            <a href="http://localhost:3333/">Blog</a>
             <a href="">Shop</a>
           </nav>
         </div>
@@ -67,7 +82,7 @@ export default function Footer({ className }) {
       </div>
       <div className={styles.bottom}>
         <p className={`${sourceSansPro.className} ${styles.license}`}>
-          LawCounsel - 2018
+          LawCounsel - © 2018
         </p>
       </div>
     </footer>

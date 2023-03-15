@@ -7,6 +7,11 @@
   margin-inline: auto;
   max-width: 1400px;
   margin: auto;
+  scroll-snap-type: y proximity;
+}
+
+.main > * {
+  scroll-snap-align: start;
 }
 
 .navNHero {
@@ -22,7 +27,8 @@
   min-height: 100vh;
 }
 
-.desktopNav {
+.desktopNav,
+.mobileNav {
   position: sticky;
   top: 0;
   z-index: 1;
@@ -30,6 +36,10 @@
   width: 100%;
   border-bottom: 1px solid #ffffff0f;
   height: 90px;
+}
+
+.mobileNav {
+  display: none;
 }
 
 /* Enable hover only on non-touch devices */
@@ -44,6 +54,14 @@
     height: fit-content;
     background-position: center bottom;
     padding-bottom: 400px; /* For photo alignment */
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .main .mobileNav {
+    display: flex;
   }
 }
 
