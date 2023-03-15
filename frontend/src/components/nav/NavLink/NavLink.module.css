@@ -1,0 +1,27 @@
+.container {
+  background-color: #00000000;
+  transition: color 300ms, border 100ms;
+  cursor: pointer;
+  margin-top: auto;
+  text-decoration: none;
+  justify-content: space-between;
+  display: flex;
+  font-weight: 500;
+  flex-flow: column nowrap;
+}
+
+.container hr {
+  width: 0;
+  visibility: hidden;
+  height: 3px;
+  margin-top: 1rem;
+  background-color: #ccbd99;
+  border: none;
+  transition-duration: 300ms;
+}
+
+.container:hover hr,
+.container:hover.active {
+  visibility: visible;
+  width: 100%;
+}

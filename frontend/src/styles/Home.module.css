@@ -1,0 +1,54 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin-inline: auto;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.navNHero {
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* aspect-ratio: 1600 / 798; */
+  background-image: url(https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Home-1-Banner-Image.jpg?id=8201);
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.desktopNav {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #ffffff0a;
+  width: 100%;
+  border-bottom: 1px solid #ffffff0f;
+  height: 90px;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .main .navNHero {
+    background-image: url(https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Home-1-Banner-Image-Mobile.png?id=8459);
+    /* aspect-ratio: 720 / 1120; */
+    height: fit-content;
+    background-position: center bottom;
+    padding-bottom: 400px; /* For photo alignment */
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+  .navNHero {
+  }
+}

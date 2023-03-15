@@ -1,0 +1,110 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  height: fit-content;
+  width: 100%;
+  padding-inline: 1.25rem;
+  max-width: var(--max-width);
+  margin-block: auto;
+}
+
+.headline {
+  width: 60%;
+  font-size: 50px;
+  color: #ffffff;
+}
+
+@keyframes riseIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.subHeadline {
+  font-size: 1rem;
+  width: 60%;
+  animation-delay: 300ms;
+  color: #ffffff;
+}
+
+.cta {
+  padding-top: 12px;
+  padding-bottom: 13px;
+  padding-inline: 35px;
+  width: fit-content;
+  background-color: #ccbd99;
+  border-radius: 30px;
+  border: 1px solid #ccbd99;
+  transition: all 0.3s;
+  color: #252525;
+  font-size: 13px;
+  animation-delay: 600ms;
+}
+
+.headline,
+.subHeadline,
+.cta {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.subHeadline,
+.headline,
+.cta {
+  animation-name: riseIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .cta:hover {
+    background-color: #00000000;
+    color: #ccbd99;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-block: 0;
+  }
+
+  .headline {
+    font-size: 25px;
+    width: 100%;
+  }
+
+  .subHeadline {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .cta {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.25rem;
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 768px) and (max-width: 1120px) {
+  .container {
+  }
+}

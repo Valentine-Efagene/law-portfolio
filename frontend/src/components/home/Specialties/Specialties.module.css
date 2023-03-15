@@ -1,0 +1,132 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  width: 100%;
+  padding-block: 4rem;
+  padding-inline: 1.25rem;
+  background-image: url(https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Areas-of-Practice-Background-Image.png?id=8188);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #ffffff;
+}
+
+.container > * {
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+.heading {
+  font-size: 30px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.description {
+  text-align: center;
+  font-size: 26px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.specialties {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6rem 3rem;
+}
+
+.specialties .card {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 1fr;
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.card img {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.specialties .card h2 {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.specialties .card p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@keyframes slideIn {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animatedSpecialties .card {
+  animation-name: slideIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.animatedSpecialties .card:nth-child(4),
+.animatedSpecialties .card:nth-child(5),
+.animatedSpecialties .card:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.25rem;
+  }
+
+  .container .specialties {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .container .specialties .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .container .specialties .card > *:not(:first-child) {
+    margin-top: 1rem;
+  }
+
+  .specialties .card img {
+    grid-row: unset;
+    grid-column: unset;
+  }
+
+  .specialties .specialties .card h2 {
+    text-align: center;
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .specialties .card p {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 768px) and (max-width: 1120px) {
+}

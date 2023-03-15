@@ -1,0 +1,71 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  width: 100%;
+  background-color: #171717;
+  background-position: right bottom;
+  background-image: url("https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/06/footer.png");
+  background-size: cover;
+  margin-top: 2px solid #ffffff;
+  color: #d9e0e8;
+}
+
+.container h3 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  padding-block: 1rem;
+}
+
+.grid,
+.bottom > .license {
+  max-width: var(--max-width);
+  margin: auto;
+  width: 100%;
+}
+
+.about,
+.services,
+.contact,
+.links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.grid {
+  padding-block: 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.container nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+}
+
+@media (max-width: 768px) {
+  .container .grid {
+    grid-template-columns: 1fr;
+    gap: 5rem;
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 768px) and (max-width: 1120px) {
+}

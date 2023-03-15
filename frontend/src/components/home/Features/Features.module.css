@@ -1,0 +1,143 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  width: 100%;
+  max-width: var(--max-width);
+  padding-block: 4rem;
+  padding-inline: 1.25rem;
+}
+
+.heading {
+  font-size: 30px;
+  color: #000000;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.description {
+  text-align: center;
+  font-size: 26px;
+  color: #232323;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.features .card {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 1fr;
+  opacity: 0;
+}
+
+.card img {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.features .card h2 {
+  font-size: 22px;
+  line-height: 1.5;
+  color: #000000;
+}
+
+.features .card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #232323;
+}
+
+.animatedFeatures {
+}
+
+.animatedFeatures .card:nth-child(1) {
+  transform: translateX(-100px);
+  opacity: 0;
+  animation-name: slideIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.animatedFeatures .card:nth-child(2) {
+  transform: translateY(50px);
+  opacity: 0;
+  animation-name: slideIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.animatedFeatures .card:nth-child(3) {
+  transform: translateX(100px);
+  opacity: 0;
+  animation-name: slideIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.25rem;
+  }
+
+  .container .features {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .container .features .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .container .features .card > *:not(:first-child) {
+    margin-top: 1rem;
+  }
+
+  .features .card img {
+    grid-row: unset;
+    grid-column: unset;
+  }
+
+  .features .features .card h2 {
+    text-align: center;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #000000;
+  }
+
+  .features .card p {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #232323;
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 768px) and (max-width: 1120px) {
+}
