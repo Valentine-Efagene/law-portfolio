@@ -4,6 +4,14 @@ import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../../client";
+import styles from "./post.module.css";
+
+import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
+import { string } from "prop-types";
+import useElementOnScreen from "@/hooks/useElementOnScreen";
+
+const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
+const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
@@ -35,8 +43,8 @@ const Post = ({ post }) => {
     body = [],
   } = post;
   return (
-    <article>
-      <h1>{title}</h1>
+    <article className={styles.container}>
+      <h1 className={sourceSansPro.className}>{title}</h1>
       <span>By {name}</span>
       {categories && (
         <ul>
@@ -49,6 +57,7 @@ const Post = ({ post }) => {
       {authorImage && (
         <div>
           <img
+            className={styles.authorImage}
             src={urlFor(authorImage).width(50).url()}
             alt={`${name}'s picture`}
           />

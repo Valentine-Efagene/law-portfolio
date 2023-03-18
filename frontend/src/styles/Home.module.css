@@ -14,10 +14,6 @@
   scroll-snap-align: start;
 }
 
-.hero {
-  margin-top: 90px;
-}
-
 .navNHero {
   background-repeat: no-repeat;
   background-size: cover;
@@ -46,6 +42,10 @@
   display: none;
 }
 
+.hero {
+  margin-block: auto;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
 }
@@ -72,5 +72,11 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .navNHero {
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    margin-top: 90px;
   }
 }
