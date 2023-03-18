@@ -27,21 +27,6 @@
   min-height: 100vh;
 }
 
-.desktopNav,
-.mobileNav {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  background-color: #16151196;
-  width: 100%;
-  border-bottom: 1px solid #ffffff0f;
-  height: 90px;
-}
-
-.mobileNav {
-  display: none;
-}
-
 .hero {
   margin-block: auto;
 }
@@ -58,14 +43,6 @@
     height: fit-content;
     background-position: center bottom;
     padding-bottom: 400px; /* For photo alignment */
-  }
-
-  .desktopNav {
-    display: none;
-  }
-
-  .main .mobileNav {
-    display: flex;
   }
 }
 

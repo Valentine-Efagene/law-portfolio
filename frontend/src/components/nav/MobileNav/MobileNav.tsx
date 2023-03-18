@@ -1,4 +1,5 @@
-import { string } from "prop-types";
+"use client";
+
 import React, { useState } from "react";
 import styles from "./MobileNav.module.css";
 import Link from "next/link";

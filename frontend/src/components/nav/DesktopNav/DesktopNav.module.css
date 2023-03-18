@@ -1,16 +1,24 @@
 .container {
-  position: fixed;
   top: 0;
+  position: fixed;
+  z-index: 1;
+  background-color: var(--nav-header-bg);
+  height: 90px;
+  width: 100%;
+  border-bottom: 1px solid #ffffff0f;
+  display: flex;
+}
+
+.nav {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  height: 90px;
+  height: 100%;
   align-items: center;
   width: 100%;
   max-width: var(--max-width);
   margin-inline: auto;
   color: #ffffff;
-  padding-inline: 1.25rem;
 }
 
 .navItemsWrapper {
@@ -29,6 +37,6 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 1.25rem;
+    display: none;
   }
 }

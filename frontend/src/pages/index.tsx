@@ -21,12 +21,8 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.navNHero}>
-          <div className={styles.desktopNav}>
-            <DesktopNav />
-          </div>
-          <div className={styles.mobileNav}>
-            <MobileNav />
-          </div>
+          <DesktopNav className={styles.desktopNav} />
+          <MobileNav className={styles.mobileNav} />
           <Hero className={styles.hero} />
         </div>
         <Features className={styles.features} />

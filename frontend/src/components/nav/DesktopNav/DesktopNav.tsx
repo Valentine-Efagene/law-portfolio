@@ -15,31 +15,33 @@ const rubik = Rubik({ subsets: ["latin"] });
 
 export default function DesktopNav({ className }: IDesktopNavProps) {
   return (
-    <nav className={`${className} ${styles.container} ${rubik.className}`}>
-      <Link href="/" className={styles.logo}>
-        <Image
-          alt=""
-          height={43.5}
-          src="https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Default-Logo.png"
-        />
-      </Link>
-      <div className={styles.navItemsWrapper}>
-        <NavLink href="/" className={styles.navButton}>
-          Home
-        </NavLink>
-        <NavLink href="http://localhost:3333/" className={styles.navButton}>
-          Blog
-        </NavLink>
-        <NavLink href="/users" className={styles.navButton}>
-          Contacts
-        </NavLink>
-        <NavLink href="/profile" className={styles.navButton}>
-          Profile
-        </NavLink>
-        <NavLink href="/about" className={styles.navButton}>
-          About
-        </NavLink>
-      </div>
-    </nav>
+    <div className={`${className} ${styles.container} ${rubik.className}`}>
+      <nav className={styles.nav}>
+        <Link href="/" className={styles.logo}>
+          <Image
+            alt=""
+            height={43.5}
+            src="https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Default-Logo.png"
+          />
+        </Link>
+        <div className={styles.navItemsWrapper}>
+          <NavLink href="/" className={styles.navButton}>
+            Home
+          </NavLink>
+          <NavLink href="/blog" className={styles.navButton}>
+            Blog
+          </NavLink>
+          <NavLink href="/users" className={styles.navButton}>
+            Contacts
+          </NavLink>
+          <NavLink href="/profile" className={styles.navButton}>
+            Profile
+          </NavLink>
+          <NavLink href="/about" className={styles.navButton}>
+            About
+          </NavLink>
+        </div>
+      </nav>
+    </div>
   );
 }
