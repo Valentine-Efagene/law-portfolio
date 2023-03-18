@@ -11,11 +11,11 @@ const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
-Footer.propTypes = {
-  className: string,
-};
+interface IFooterProps {
+  className?: string;
+}
 
-export default function Footer({ className }) {
+export default function Footer({ className }: IFooterProps) {
   return (
     <footer className={`${className} ${styles.container}`}>
       <div className={styles.grid}>

@@ -1,14 +1,13 @@
 import { string } from "prop-types";
 import React, { useState } from "react";
-import NavLink from "../NavLink/NavLink";
 import styles from "./MobileNav.module.css";
 import Link from "next/link";
 import Image from "@/components/common/Image";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-MobileNav.propTypes = {
-  className: string,
-};
+interface IMobileNavProps {
+  className?: string;
+}
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 
@@ -16,7 +15,7 @@ const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
-export default function MobileNav({ className }) {
+export default function MobileNav({ className }: IMobileNavProps) {
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {

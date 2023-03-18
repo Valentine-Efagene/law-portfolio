@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import DesktopNav from "@/components/nav/DesktopNav";
@@ -28,7 +27,7 @@ export default function Home() {
           <div className={styles.mobileNav}>
             <MobileNav />
           </div>
-          <Hero />
+          <Hero className={styles.hero} />
         </div>
         <Features className={styles.features} />
         <Specialties className={styles.specialties} />

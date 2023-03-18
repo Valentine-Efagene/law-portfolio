@@ -7,9 +7,13 @@ const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
-export default function Hero() {
+interface IHeroProps {
+  className?: string;
+}
+
+export default function Hero({ className }: IHeroProps) {
   return (
-    <section className={styles.container}>
+    <section className={`${className} ${styles.container}`}>
       <h1 className={`${playfairDisplay.className} ${styles.headline}`}>
         Really Unbelievable Solutions for all Legal Cases.
       </h1>

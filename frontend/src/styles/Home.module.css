@@ -14,6 +14,10 @@
   scroll-snap-align: start;
 }
 
+.hero {
+  margin-top: 90px;
+}
+
 .navNHero {
   background-repeat: no-repeat;
   background-size: cover;
@@ -29,10 +33,10 @@
 
 .desktopNav,
 .mobileNav {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1;
-  background-color: #ffffff0a;
+  background-color: #16151196;
   width: 100%;
   border-bottom: 1px solid #ffffff0f;
   height: 90px;

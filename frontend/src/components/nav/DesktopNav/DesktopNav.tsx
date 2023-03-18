@@ -7,13 +7,13 @@ import styles from "./DesktopNav.module.css";
 import { Inter } from "next/font/google";
 import { Rubik } from "next/font/google";
 
-DesktopNav.propTypes = {
-  className: string,
-};
+interface IDesktopNavProps {
+  className?: string;
+}
 
 const rubik = Rubik({ subsets: ["latin"] });
 
-export default function DesktopNav({ className }) {
+export default function DesktopNav({ className }: IDesktopNavProps) {
   return (
     <nav className={`${className} ${styles.container} ${rubik.className}`}>
       <Link href="/" className={styles.logo}>

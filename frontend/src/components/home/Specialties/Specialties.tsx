@@ -5,10 +5,10 @@ import { object, string } from "prop-types";
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import useElementOnScreen from "@/hooks/useElementOnScreen";
 
-Specialties.propTypes = {
-  className: string,
-  style: object,
-};
+interface ISpecialtiesProps {
+  className?: string;
+  style?: object;
+}
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -59,7 +59,7 @@ const specialties = [
   },
 ];
 
-export default function Specialties({ className, style }) {
+export default function Specialties({ className, style }: ISpecialtiesProps) {
   const [specialtiesRef, isVisible] = useElementOnScreen({
     threshold: 0.1,
   });

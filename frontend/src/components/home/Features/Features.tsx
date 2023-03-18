@@ -9,9 +9,9 @@ const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
-Features.propTypes = {
-  className: string,
-};
+interface IFeaturesProps {
+  className?: string;
+}
 
 const features = [
   {
@@ -37,7 +37,7 @@ const features = [
   },
 ];
 
-export default function Features({ className }) {
+export default function Features({ className }: IFeaturesProps) {
   const [featureRef, isFeatureVisible] = useElementOnScreen({ threshold: 0.3 });
 
   return (
