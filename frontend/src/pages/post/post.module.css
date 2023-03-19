@@ -82,6 +82,7 @@
 
 .bodyImage {
   margin-block: 1rem;
+  max-width: 100%;
 }
 
 @media (min-width: 768px) {
