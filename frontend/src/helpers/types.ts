@@ -11,7 +11,8 @@ export interface IPost {
     },
     description?: string,
     mainImage?: ISanityImage,
-    slug: ISlug
+    slug: ISlug,
+    _createdAt: string
 }
 
 export interface ISlug {

@@ -21,6 +21,7 @@
 }
 
 .header .content {
+  width: min(100%, var(--max-width));
   margin-inline: auto;
 }
 

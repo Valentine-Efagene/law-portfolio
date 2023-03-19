@@ -7,9 +7,10 @@ import client from "../../../client";
 import styles from "./post.module.css";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
-import { string } from "prop-types";
-import useElementOnScreen from "@/hooks/useElementOnScreen";
+import Image from "@/components/common/Image";
+import SanityHelper from "@/helpers/SanityHelper";
 
+const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
@@ -40,30 +41,68 @@ const Post = ({ post }) => {
     name = "Missing name",
     categories,
     authorImage,
+    mainImage,
     body = [],
+    _createdAt: date,
   } = post;
   return (
     <article className={styles.container}>
-      <h1 className={sourceSansPro.className}>{title}</h1>
-      <span>By {name}</span>
-      {categories && (
-        <ul>
-          Posted in
-          {categories.map((category) => (
-            <li key={category}>{category}</li>
-          ))}
-        </ul>
-      )}
-      {authorImage && (
-        <div>
-          <img
-            className={styles.authorImage}
-            src={urlFor(authorImage).width(50).url()}
-            alt={`${name}'s picture`}
-          />
+      <header className={styles.header}>
+        <h1 className={playfairDisplay.className}>{title}</h1>
+        {mainImage && (
+          <div className={styles.mainImageWrapper}>
+            <Image
+              fill
+              className={styles.mainImage}
+              alt=""
+              src={SanityHelper.urlFor(mainImage)
+                .fit("max")
+                .auto("format")
+                .url()}
+            />
+          </div>
+        )}
+        <div className={styles.authorNCat}>
+          {authorImage && (
+            <div className={styles.author}>
+              <img
+                className={styles.authorImage}
+                src={urlFor(authorImage).width(50).url()}
+                alt={`${name}'s picture`}
+              />
+              <div className={styles.dateNName}>
+                {name && (
+                  <div className={`${rubik.className} ${styles.authorName}`}>
+                    {name}
+                  </div>
+                )}
+                {date && (
+                  <div className={sourceSansPro.className}>
+                    {new Date(date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          {categories && (
+            <ul className={styles.categories}>
+              {categories.map((category) => (
+                <li className={styles.category} key={category}>
+                  {category}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      )}
-      <PortableText value={body} components={ptComponents} />
+      </header>
+
+      <p className={styles.body}>
+        <PortableText value={body} components={ptComponents} />
+      </p>
     </article>
   );
 };
@@ -73,7 +112,9 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   "name": author->name,
   "categories": categories[]->title,
   "authorImage": author->image,
-  body
+  mainImage,
+  body,
+  _createdAt
 }`;
 export async function getStaticPaths() {
   const paths = await client.fetch(
