@@ -28,6 +28,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
+  flex-flow: row wrap;
 }
 
 .categories {
@@ -62,6 +63,7 @@
 .author {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
   font-weight: 500;
 }
 
@@ -78,6 +80,10 @@
   padding-block: 1.25rem;
 }
 
+.bodyImage {
+  margin-block: 1rem;
+}
+
 @media (min-width: 768px) {
   .mainImageWrapper {
     max-height: 60vh;
@@ -85,13 +91,4 @@
 }
 
 @media (max-width: 768px) {
-  .authorNCat {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .categories {
-    width: 100%;
-  }
 }

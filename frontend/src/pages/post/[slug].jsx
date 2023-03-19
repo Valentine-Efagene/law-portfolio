@@ -20,12 +20,15 @@ function urlFor(source) {
 
 const ptComponents = {
   types: {
+    // If value is null, check that the image was not partially uploaded
     image: ({ value }) => {
       if (!value?.asset?._ref) {
         return null;
       }
+
       return (
         <img
+          className={styles.bodyImage}
           alt={value.alt || " "}
           loading="lazy"
           src={urlFor(value).width(320).height(240).fit("max").auto("format")}
@@ -100,9 +103,9 @@ const Post = ({ post }) => {
         </div>
       </header>
 
-      <p className={styles.body}>
+      <div className={styles.body}>
         <PortableText value={body} components={ptComponents} />
-      </p>
+      </div>
     </article>
   );
 };
