@@ -6,6 +6,7 @@ import NavLink from "../NavLink/NavLink";
 import styles from "./DesktopNav.module.css";
 import { Inter } from "next/font/google";
 import { Rubik } from "next/font/google";
+import Logo from "../Logo";
 
 interface IDesktopNavProps {
   className?: string;
@@ -17,13 +18,7 @@ export default function DesktopNav({ className }: IDesktopNavProps) {
   return (
     <div className={`${className} ${styles.container} ${rubik.className}`}>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.logo}>
-          <Image
-            alt=""
-            height={43.5}
-            src="https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Default-Logo.png"
-          />
-        </Link>
+        <Logo alt="" href="/" className={styles.logo} />
         <div className={styles.navItemsWrapper}>
           <NavLink href="/" className={styles.navButton}>
             Home

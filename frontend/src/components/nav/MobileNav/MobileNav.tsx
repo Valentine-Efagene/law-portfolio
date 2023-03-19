@@ -11,6 +11,7 @@ interface IMobileNavProps {
 }
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
+import Logo from "../Logo";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -29,13 +30,7 @@ export default function MobileNav({ className }: IMobileNavProps) {
 
   return (
     <nav className={`${className} ${styles.container}`}>
-      <Link href="/" className={styles.logo}>
-        <Image
-          alt=""
-          height={43.5}
-          src="https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Default-Logo.png"
-        />
-      </Link>
+      <Logo className={styles.logo} alt="" href="/" />
       <button className={styles.toggle} onClick={openMenu}>
         <FaBars className={styles.icon} />
       </button>
@@ -50,7 +45,7 @@ export default function MobileNav({ className }: IMobileNavProps) {
         <a className={styles.navItem} href="">
           Home
         </a>
-        <a className={styles.navItem} href="http://localhost:3333/">
+        <a className={styles.navItem} href="/blog">
           Blog
         </a>
         <a className={styles.navItem} href="">

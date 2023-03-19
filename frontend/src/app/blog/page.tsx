@@ -23,23 +23,27 @@ export default async function Blog() {
   const posts: IPost[] = await client.fetch(query);
 
   // For test
-  const demoPosts = Array(5).fill(posts[0]);
+  //const demoPosts = Array(5).fill(posts[0]);
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Suit Blog</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro error
-          explicabo modi quasi quidem, nostrum assumenda reiciendis, dolorum
-          tempora excepturi dignissimos aut.
-        </p>
+        <div className={styles.content}>
+          <h1>Suit Blog</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
+            error explicabo modi quasi quidem, nostrum assumenda reiciendis,
+            dolorum tempora excepturi dignissimos aut.
+          </p>
+        </div>
       </header>
+      <h2>Posts</h2>
       <div className={styles.posts}>
-        {demoPosts?.map((post) => {
+        {posts?.map((post) => {
           const {
             _id,
             slug: { current },
+            mainImage,
             author: { name: authorName, image: authorImage },
             description,
             title,
@@ -47,22 +51,39 @@ export default async function Blog() {
 
           return (
             <Link href={`/post/${current}`} className={styles.card} key={_id}>
-              <h3>{title}</h3>
-              {description && <p>{description}</p>}
-              <div className={styles.author}>
-                {authorImage && (
+              {mainImage && (
+                <div className={styles.mainImageWrapper}>
                   <Image
-                    className={styles.authorImage}
+                    fill
+                    className={styles.mainImage}
                     alt=""
-                    src={SanityHelper.urlFor(authorImage)
-                      .width(32)
-                      .height(32)
+                    src={SanityHelper.urlFor(mainImage)
                       .fit("max")
                       .auto("format")
                       .url()}
                   />
-                )}
-                <span>{authorName}</span>
+                </div>
+              )}
+              <div className={styles.details}>
+                <h3>{title}</h3>
+                {description && <p>{description}</p>}
+                <div className={styles.author}>
+                  {authorImage && (
+                    <Image
+                      className={styles.authorImage}
+                      alt=""
+                      width={32}
+                      height={32}
+                      src={SanityHelper.urlFor(authorImage)
+                        .width(32)
+                        .height(32)
+                        .fit("max")
+                        .auto("format")
+                        .url()}
+                    />
+                  )}
+                  <span>{authorName}</span>
+                </div>
               </div>
             </Link>
           );

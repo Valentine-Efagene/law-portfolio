@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "@/components/common/Image";
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import { FaFacebook, FaGoogle, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import Logo from "@/components/nav/Logo";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -25,13 +26,7 @@ export default function Footer({ className }: IFooterProps) {
             We’re on a mission to build a better future where justice creates
             good jobs for everyone.
           </p>
-          <Link href="/" className={styles.logo}>
-            <Image
-              alt=""
-              height={43.5}
-              src="https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Default-Logo.png"
-            />
-          </Link>
+          <Logo className={styles.logo} />
           <div className={styles.socials}>
             <a href="">
               <FaFacebook className={styles.icon} />
