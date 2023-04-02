@@ -4,7 +4,6 @@ import { string } from "prop-types";
 import React, { useState } from "react";
 import NavLink from "../NavLink/NavLink";
 import styles from "./DesktopNav.module.css";
-import { Inter } from "next/font/google";
 import { Rubik } from "next/font/google";
 import Logo from "../Logo";
 
@@ -26,8 +25,8 @@ export default function DesktopNav({ className }: IDesktopNavProps) {
           <NavLink href="/blog" className={styles.navButton}>
             Blog
           </NavLink>
-          <NavLink href="/users" className={styles.navButton}>
-            Contacts
+          <NavLink href="/history" className={styles.navButton}>
+            History
           </NavLink>
           <NavLink href="/profile" className={styles.navButton}>
             Profile

@@ -54,8 +54,8 @@ export default function MobileNav({ className }: IMobileNavProps) {
         <a className={styles.navItem} href="">
           Services
         </a>
-        <a className={styles.navItem} href="">
-          Contact
+        <a className={styles.navItem} href="/history">
+          History
         </a>
       </div>
     </nav>

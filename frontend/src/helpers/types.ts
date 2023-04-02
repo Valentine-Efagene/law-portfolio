@@ -10,6 +10,10 @@ interface IPost {
     slug: ISlug,
     _createdAt: string,
     comments?: IComment[],
+    author?: {
+        name: string,
+        image: string,
+    },
     authorImage?: ISanityImage,
     body: any[]
 }

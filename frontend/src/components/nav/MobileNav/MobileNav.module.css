@@ -21,6 +21,7 @@
   border: none;
   background-color: #00000000;
   cursor: pointer;
+  color: #ffffff;
 }
 
 .toggle .icon {
