@@ -3,6 +3,7 @@
   grid-template-columns: 1fr;
   gap: 2rem;
   position: relative;
+  --card-bg: beige;
 }
 
 .details {
@@ -40,15 +41,35 @@
 
 .details .card {
   padding: 1.25rem;
-  background-color: beige;
+  background-color: var(--card-bg);
   border-radius: 0.2rem;
+  position: relative;
+}
+
+.details:nth-child(odd) .card::before {
+  right: -0.5rem;
+}
+
+.details:nth-child(even) .card::before {
+  left: -0.5rem;
+}
+
+.details .card::before {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  z-index: 1;
+  top: 1rem;
+  background-color: var(--card-bg);
+  transform: rotateZ(45deg);
 }
 
 .dot {
   color: brown;
   position: absolute;
   z-index: 1;
-  background-color: beige;
+  background-color: var(--card-bg);
   width: fit-content;
   height: fit-content;
   border-radius: 50%;
@@ -63,6 +84,7 @@
 .dot > * {
   width: 1rem;
   height: 1rem;
+  background-color: var(--card-bg);
 }
 
 @media screen and (max-width: 768px) {
