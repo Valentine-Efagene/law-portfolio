@@ -1,0 +1,17 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.container p {
+}

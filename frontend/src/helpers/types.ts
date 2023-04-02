@@ -1,22 +1,27 @@
 import { SanityAsset } from "@sanity/image-url/lib/types/types"
 
-export interface IPost {
+interface IPost {
     _id: string,
     title: string,
     name?: string,
-    categories?: ICategory[],
-    author?: {
-        name: string,
-        image: ISanityImage
-    },
+    categories?: string[],
     description?: string,
     mainImage?: ISanityImage,
     slug: ISlug,
     _createdAt: string,
-    comments?: IComment[]
+    comments?: IComment[],
+    authorImage?: ISanityImage,
+    body: any[]
 }
 
-export interface IComment {
+interface IComment {
+    _id: string,
+    name: string,
+    email: string,
+    comment: string
+}
+
+interface IComment {
     approved: boolean,
     comment: string,
     email: string,
@@ -32,17 +37,19 @@ export interface IComment {
     _updatedAt: string
 }
 
-export interface ISlug {
+interface ISlug {
     _type: string,
     current: string
 }
 
 
-export interface ICategory {
+interface ICategory {
     title: string
 }
 
-export interface ISanityImage {
+interface ISanityImage {
     _type: string,
     asset: SanityAsset
 }
+
+export type { ISanityImage, ICategory, IComment, IPost, ISlug }

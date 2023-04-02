@@ -5,7 +5,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../../client";
 import styles from "./post.module.css";
-import { ICategory, IPost, ISanityImage } from "@/helpers/types";
+import { ICategory, IComment, IPost, ISanityImage } from "@/helpers/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
@@ -19,6 +19,7 @@ import {
   useState,
 } from "react";
 import CommentForm from "@/components/forms/CommentForm/CommentForm";
+import Comments from "@/components/listings/Comments";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -55,16 +56,7 @@ const ptComponents = {
 };
 
 interface IPostProps {
-  post: {
-    _id: string;
-    title?: string;
-    name?: string;
-    categories: string[];
-    authorImage: any;
-    mainImage: any;
-    body: any;
-    _createdAt: string;
-  };
+  post: IPost;
 }
 
 const Post = ({ post }: IPostProps) => {
@@ -73,6 +65,7 @@ const Post = ({ post }: IPostProps) => {
     name = "Missing name",
     categories,
     authorImage,
+    comments,
     mainImage,
     body = [],
     _id,
@@ -80,13 +73,18 @@ const Post = ({ post }: IPostProps) => {
   } = post;
 
   const defaultData = {
-    _id,
+    post_id: _id,
     name: "",
     email: "",
     comment: "",
   };
 
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState<{
+    post_id: string;
+    name: string;
+    email: string;
+    comment: string;
+  }>(defaultData);
 
   const handleChange: ChangeEventHandler = (e: ChangeEvent) => {
     const { name, value } = e.target as HTMLInputElement;
@@ -100,6 +98,7 @@ const Post = ({ post }: IPostProps) => {
 
   const handleSubmit: FormEventHandler = async (e: FormEvent) => {
     e.preventDefault();
+
     try {
       setIsSubmittingComment(true);
       const response = await fetch("/api/createComment", {
@@ -175,11 +174,12 @@ const Post = ({ post }: IPostProps) => {
             )}
             {categories && (
               <ul className={styles.categories}>
-                {categories.map((category) => (
-                  <li className={styles.category} key={category}>
-                    {category}
-                  </li>
-                ))}
+                {categories &&
+                  categories.map((category) => (
+                    <li className={styles.category} key={category}>
+                      {category}
+                    </li>
+                  ))}
               </ul>
             )}
           </div>
@@ -207,18 +207,25 @@ const Post = ({ post }: IPostProps) => {
           />
         </section>
       )}
+      <Comments className={styles.comments} comments={comments} />
     </div>
   );
 };
 
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
+  _id,
   title,
   "name": author->name,
   "categories": categories[]->title,
   "authorImage": author->image,
   mainImage,
   body,
-  _createdAt
+  _createdAt,
+  "comments": *[
+    _type == "comment" && 
+    post._ref == ^._id &&
+    approved == true
+  ]
 }`;
 export async function getStaticPaths() {
   const paths = await client.fetch(

@@ -4,6 +4,10 @@ export default {
   title: 'Comment',
   fields: [
     {
+      name: 'name',
+      type: 'string',
+    },
+    {
       name: 'email',
       type: 'string',
     },
