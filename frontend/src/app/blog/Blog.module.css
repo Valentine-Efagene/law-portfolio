@@ -5,7 +5,7 @@
   line-height: 1.5;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 1rem;
   overflow-x: auto;
 }
 
@@ -33,7 +33,7 @@
   font-size: min(10vw, 5rem);
 }
 
-.container h2 {
+.container .h2 {
   font-size: 2rem;
   width: min(100%, var(--max-width));
   margin-inline: auto;
@@ -47,9 +47,11 @@
   width: min(100%, var(--max-width));
   margin-inline: auto;
   padding: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .card {
+  background-color: #ffffff;
   text-decoration: none;
   color: #000000;
   transition: 300ms;

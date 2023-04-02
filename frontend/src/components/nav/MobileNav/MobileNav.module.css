@@ -40,7 +40,7 @@
   padding-block: 1.5rem;
   width: 0;
   transition: visibility 300ms, width 500ms;
-  z-index: 2;
+  z-index: 3;
   visibility: collapse;
 }
 

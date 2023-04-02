@@ -37,14 +37,14 @@ export default async function Blog() {
           </p>
         </div>
       </header>
-      <h2>Posts</h2>
+      <h2 className={styles.h2}>Posts</h2>
       <div className={styles.posts}>
         {posts?.map((post) => {
           const {
             _id,
             slug: { current },
             mainImage,
-            author: { name: authorName, image: authorImage },
+            author: { name: authorName, image: authorImage } = {},
             description,
             title,
           } = post;

@@ -1,17 +1,41 @@
 .container {
+  --secondary-max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr;
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  margin-inline: auto;
+  background-color: #ffffff;
+  padding-bottom: 4rem;
+}
+
+.container > article {
   display: grid;
   grid-template-columns: 1fr;
   font-family: "Inter", sans-serif;
   margin-inline: auto;
-  line-height: 1.5;
   background-color: #ffffff;
 }
 
+.commentSection h2 {
+  margin-bottom: 2rem;
+}
+
 .authorNCat,
-.body {
+.mainImageWrapper,
+.container h1 {
   margin-inline: auto;
-  width: min(100%, var(--max-width));
   padding-inline: 1.25rem;
+  width: min(100%, var(--max-width));
+}
+
+.body,
+.commentFeedback,
+.container .header h1,
+.commentSection {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  width: min(100%, var(--secondary-max-width));
 }
 
 .container .header {
@@ -19,7 +43,7 @@
 }
 
 .container h1 {
-  font-size: min(10vw, 5rem);
+  font-size: min(10vw, 4rem);
   color: rgb(75, 75, 75);
   padding: 1.25rem;
 }
@@ -50,7 +74,6 @@
 
 .mainImageWrapper {
   position: relative;
-  width: 100vw;
   aspect-ratio: 16/9;
   overflow: hidden;
   max-height: 50vh;
@@ -78,11 +101,18 @@
 .body {
   margin-block: 1rem;
   padding-block: 1.25rem;
+  display: grid;
 }
 
 .bodyImage {
   margin-block: 1rem;
-  max-width: 100%;
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+}
+
+.commentFeedback {
+  background-color: var(--color-primary);
+  padding-block: 2rem;
 }
 
 @media (min-width: 768px) {
