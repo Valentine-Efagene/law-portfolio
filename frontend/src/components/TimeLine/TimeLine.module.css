@@ -13,6 +13,14 @@
   width: calc(50% - 2rem);
 }
 
+.container h3 {
+  font-weight: 600;
+}
+
+.container h4 {
+  font-weight: 500;
+}
+
 .line {
   position: absolute;
   width: 2px;
@@ -104,6 +112,8 @@
     left: 1rem;
   }
 
-  .container .details {
+  .container .details .card::before {
+    /* left: -0.5rem; */
+    display: none;
   }
 }

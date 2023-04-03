@@ -7,6 +7,7 @@ import Features from "@/components/home/Features";
 import Footer from "@/components/home/Footer";
 import Specialties from "@/components/home/Specialties";
 import MobileNav from "@/components/nav/MobileNav";
+import ContactBar from "@/components/nav/SocialBar/ContactBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.navNHero}>
+          <ContactBar />
           <DesktopNav className={styles.desktopNav} />
           <MobileNav className={styles.mobileNav} />
           <Hero className={styles.hero} />

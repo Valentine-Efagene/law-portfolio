@@ -1,6 +1,7 @@
 .container {
+  /* 
   top: 0;
-  position: fixed;
+  position: sticky; */
   z-index: 1;
   background-color: var(--nav-header-bg);
   height: 90px;

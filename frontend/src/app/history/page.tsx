@@ -7,9 +7,10 @@ import {
   FaCertificate,
 } from "react-icons/fa";
 import TimeLine from "../../components/TimeLine";
-import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
+import { Playfair_Display, Rubik } from "next/font/google";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
+const rubik = Rubik({ subsets: ["latin"] });
 
 const TIMELINE = [
   {
@@ -56,7 +57,10 @@ function History() {
         </div>
       </header>
       <h2 className={`${playfairDisplay.className} ${styles.h2}`}>Timeline</h2>
-      <TimeLine className={styles.timeline} timeline={TIMELINE} />
+      <TimeLine
+        className={`${rubik.className} ${styles.timeline}`}
+        timeline={TIMELINE}
+      />
     </div>
   );
 }

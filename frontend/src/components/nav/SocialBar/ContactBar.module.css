@@ -1,0 +1,40 @@
+.container {
+  background-color: var(--color-primary);
+  width: 100%;
+  padding: 0.5rem 1.25rem;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  height: 90px;
+  width: 100%;
+  height: fit-content;
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+  color: #ffffff;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+
+.content .right .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.content > * > *:not(:first-child) {
+  margin-left: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+  }
+}
