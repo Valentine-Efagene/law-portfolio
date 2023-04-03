@@ -18,7 +18,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   /* aspect-ratio: 1600 / 798; */
-  background-image: url(https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Home-1-Banner-Image.jpg?id=8201);
+  background-image: url(/assets/img/hero-desktop-bg.jpg);
   width: 100%;
   max-width: 1440px;
   display: flex;
@@ -38,7 +38,7 @@
 /* Mobile */
 @media (max-width: 768px) {
   .main .navNHero {
-    background-image: url(https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Home-1-Banner-Image-Mobile.png?id=8459);
+    background-image: url(/assets/img/hero-mobile-bg.png);
     /* aspect-ratio: 720 / 1120; */
     height: fit-content;
     background-position: center bottom;

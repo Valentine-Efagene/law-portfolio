@@ -11,13 +11,14 @@
 
 .header {
   padding: 1.25rem;
-  background-image: url(https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Areas-of-Practice-Background-Image.png?id=8188);
+  background-image: url(/assets/img/general-bg.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   color: #ffffff;
   min-height: 30vh;
   padding-block: 4rem;
+  padding-top: 7rem;
 }
 
 .header .content {

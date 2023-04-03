@@ -8,6 +8,8 @@ import {
 } from "react-icons/fa";
 import TimeLine from "../../components/TimeLine";
 import { Playfair_Display, Rubik } from "next/font/google";
+import MobileNav from "@/components/nav/MobileNav";
+import DesktopNav from "@/components/nav/DesktopNav";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ subsets: ["latin"] });

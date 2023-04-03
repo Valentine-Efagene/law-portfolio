@@ -16,7 +16,7 @@ export default function Logo({ href = "/", className, alt = "" }: ILogoProps) {
         alt=""
         width={200}
         height={43.5}
-        src="https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Default-Logo.png"
+        src="/assets/img/default-logo.webp"
       />
     </Link>
   );

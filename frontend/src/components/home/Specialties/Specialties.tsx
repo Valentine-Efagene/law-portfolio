@@ -16,43 +16,37 @@ const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
 const specialties = [
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Business-Law-Icon.png",
+    image: "/assets/img/Real-Estate-Construction-Law-Icon.png",
     title: "Financial Analysis",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",
   },
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Education-Law-Icon.png",
+    image: "/assets/img/Personal-Injury-Law-Icon.png",
     title: "Long Experience",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",
   },
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Family-Law-Icon.png",
+    image: "/assets/img/Insurance-Defence-Icon.png",
     title: "Our Success Cases",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",
   },
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Real-Estate-Construction-Law-Icon.png",
+    image: "/assets/img/Insurance-Defence-Icon.png",
     title: "Financial Analysis",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",
   },
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Personal-Injury-Law-Icon.png",
+    image: "/assets/img/Insurance-Defence-Icon.png",
     title: "Long Experience",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",
   },
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Insurance-Defence-Icon.png",
+    image: "/assets/img/Insurance-Defence-Icon.png",
     title: "Our Success Cases",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",

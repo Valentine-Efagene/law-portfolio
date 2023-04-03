@@ -6,6 +6,7 @@ import { IPost } from "@/helpers/types";
 import Link from "next/link";
 import Image from "@/components/common/Image";
 import SanityHelper from "@/helpers/SanityHelper";
+import MobileNav from "@/components/nav/MobileNav";
 
 const query = groq`*[_type == "post"]{
   _id,

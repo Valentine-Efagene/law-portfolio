@@ -15,22 +15,19 @@ interface IFeaturesProps {
 
 const features = [
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Financial-Analysis-Icon.png?id=8184",
+    image: "/assets/img/Financial-Analysis-Icon.png",
     title: "Financial Analysis",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",
   },
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Long-Experience-Icon.png",
+    image: "/assets/img/Long-Experience-Icon.png",
     title: "Long Experience",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",
   },
   {
-    image:
-      "https://lawcounsel.radiantthemes.com/wp-content/uploads/2018/08/Our-Success-Cases-Icon.png",
+    image: "/assets/img/Our-Success-Cases-Icon.png",
     title: "Our Success Cases",
     details:
       "On the other hand we denounce with righteous indignation and dislike men.",

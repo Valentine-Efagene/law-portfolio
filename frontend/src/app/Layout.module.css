@@ -1,4 +1,5 @@
 .desktopNav {
-  position: static;
-  background-color: black;
+  /* position: static;
+  background-color: black; */
+  position: absolute;
 }

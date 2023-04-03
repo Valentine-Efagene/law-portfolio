@@ -29,20 +29,20 @@
   right: 50%;
 }
 
-.details:nth-child(odd) {
+.details:nth-child(even) {
   margin-right: auto;
 }
 
-.details:nth-child(even) {
+.details:nth-child(odd) {
   margin-left: auto;
 }
 
-.details:nth-child(odd) .dot {
+.details:nth-child(even) .dot {
   right: 50%;
   transform: translateX(50%);
 }
 
-.details:nth-child(even) .dot {
+.details:nth-child(odd) .dot {
   left: 50%;
   transform: translateX(-50%);
 }
@@ -54,11 +54,11 @@
   position: relative;
 }
 
-.details:nth-child(odd) .card::before {
+.details:nth-child(even) .card::before {
   right: -0.5rem;
 }
 
-.details:nth-child(even) .card::before {
+.details:nth-child(odd) .card::before {
   left: -0.5rem;
 }
 
