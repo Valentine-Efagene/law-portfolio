@@ -8,6 +8,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "lawcounsel.radiantthemes.com",
       },
       {
         protocol: "https",

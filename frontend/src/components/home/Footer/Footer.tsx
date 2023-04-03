@@ -46,11 +46,10 @@ export default function Footer({ className }: IFooterProps) {
           <h3 className={`${playfairDisplay.className}`}>Important Links</h3>
           <nav className={`${sourceSansPro.className}`}>
             <a href="">Home</a>
+            <a href="/blog">Blog</a>
+            <a href="/history">History</a>
             <a href="">About Us</a>
             <a href="">Attorneys</a>
-            <a href="">Careers</a>
-            <a href="http://localhost:3333/">Blog</a>
-            <a href="">Shop</a>
           </nav>
         </div>
         <div className={styles.services}>

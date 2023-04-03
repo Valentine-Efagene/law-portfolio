@@ -6,6 +6,7 @@ import NavLink from "../NavLink/NavLink";
 import styles from "./DesktopNav.module.css";
 import { Rubik } from "next/font/google";
 import Logo from "../Logo";
+import { useRouter } from "next/router";
 
 interface IDesktopNavProps {
   className?: string;

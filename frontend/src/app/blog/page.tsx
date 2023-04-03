@@ -6,7 +6,11 @@ import { IPost } from "@/helpers/types";
 import Link from "next/link";
 import Image from "@/components/common/Image";
 import SanityHelper from "@/helpers/SanityHelper";
-import MobileNav from "@/components/nav/MobileNav";
+import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
+
+const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
+const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
+const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
 const query = groq`*[_type == "post"]{
   _id,
@@ -22,6 +26,9 @@ const query = groq`*[_type == "post"]{
 
 export default async function Blog() {
   const posts: IPost[] = await client.fetch(query);
+  const searchMap = {
+    author: "Authors",
+  };
 
   // For test
   //const demoPosts = Array(5).fill(posts[0]);
@@ -38,7 +45,7 @@ export default async function Blog() {
           </p>
         </div>
       </header>
-      <h2 className={styles.h2}>Posts</h2>
+      <h2 className={`${styles.h2} ${playfairDisplay.className}`}>Latest</h2>
       <div className={styles.posts}>
         {posts?.map((post) => {
           const {

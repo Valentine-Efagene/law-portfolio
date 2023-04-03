@@ -5,7 +5,6 @@
 }
 
 .container .input {
-  border-radius: 0.4rem;
   border: 1px solid lightgray;
   padding: 0.7rem;
   font-size: 1rem;
@@ -17,12 +16,17 @@
 
 .container .submit {
   font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.4rem;
+  padding: 0.7rem 3rem;
   background-color: var(--color-primary);
   border: 2px solid var(--color-primary);
   transition: all 0.3s;
   cursor: pointer;
+  width: fit-content;
+}
+
+.container .submit:hover {
+  background-color: var(--color-primary-200);
+  border: 2px solid var(--color-primary-200);
 }
 
 .error {

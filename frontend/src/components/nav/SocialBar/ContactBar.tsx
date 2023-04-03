@@ -17,7 +17,8 @@ export default function ContactBar({ className }: IContactBarProps) {
         <div className={styles.left}>
           <Link href="/" className={styles.navItem}>
             Call Us: {process.env.NEXT_PUBLIC_TEL}
-          </Link>
+          </Link>{" "}
+          <span>|</span>
           <Link href="/blog" className={styles.navItem}>
             Email Us: {process.env.NEXT_PUBLIC_EMAIL}
           </Link>
