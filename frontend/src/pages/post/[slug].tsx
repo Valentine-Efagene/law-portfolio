@@ -20,6 +20,10 @@ import {
 } from "react";
 import CommentForm from "@/components/forms/CommentForm/CommentForm";
 import Comments from "@/components/listings/Comments";
+import DesktopNav from "@/components/nav/DesktopNav";
+import MobileNav from "@/components/nav/MobileNav";
+import Footer from "@/components/home/Footer";
+import ContactBar from "@/components/nav/SocialBar/ContactBar";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -130,6 +134,9 @@ const Post = ({ post }: IPostProps) => {
 
   return (
     <div className={styles.container}>
+      <ContactBar />
+      <DesktopNav />
+      <MobileNav />
       <article>
         <h1 className={playfairDisplay.className}>{title}</h1>
         <header className={styles.header}>
@@ -208,6 +215,7 @@ const Post = ({ post }: IPostProps) => {
         </section>
       )}
       <Comments className={styles.comments} comments={comments} />
+      <Footer className={styles.footer} />
     </div>
   );
 };
