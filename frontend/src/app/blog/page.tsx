@@ -21,7 +21,8 @@ const query = groq`*[_type == "post"]{
   },
   description,
   mainImage,
-  slug
+  slug,
+  _createdAt
 }`;
 
 export default async function Blog() {
@@ -38,14 +39,14 @@ export default async function Blog() {
       <header className={styles.header}>
         <div className={styles.content}>
           <h1>Suit Blog</h1>
-          <p>
+          <p className={sourceSansPro.className}>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
             error explicabo modi quasi quidem, nostrum assumenda reiciendis,
             dolorum tempora excepturi dignissimos aut.
           </p>
         </div>
       </header>
-      <h2 className={`${styles.h2} ${playfairDisplay.className}`}>Latest</h2>
+      <h2 className={`${styles.h2} ${sourceSansPro.className}`}>Latest</h2>
       <div className={styles.posts}>
         {posts?.map((post) => {
           const {
@@ -55,6 +56,7 @@ export default async function Blog() {
             author: { name: authorName, image: authorImage } = {},
             description,
             title,
+            _createdAt,
           } = post;
 
           return (
@@ -73,9 +75,9 @@ export default async function Blog() {
                 </div>
               )}
               <div className={styles.details}>
-                <h3>{title}</h3>
+                <h3 className={rubik.className}>{title}</h3>
                 {description && <p>{description}</p>}
-                <div className={styles.author}>
+                <div className={styles.bottom}>
                   {authorImage && (
                     <Image
                       className={styles.authorImage}
@@ -90,7 +92,16 @@ export default async function Blog() {
                         .url()}
                     />
                   )}
-                  <span>{authorName}</span>
+                  <span className={`${sourceSansPro.className} ${styles.name}`}>
+                    {authorName}
+                  </span>
+                  <span className={`${sourceSansPro.className} ${styles.date}`}>
+                    {new Date(_createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
                 </div>
               </div>
             </Link>

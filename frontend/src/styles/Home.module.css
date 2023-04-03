@@ -10,6 +10,11 @@
   scroll-snap-type: y proximity;
 }
 
+.main .navNHero .desktopNav,
+.main .navNHero .mobileNav {
+  background-color: #16151196;
+}
+
 .main > * {
   scroll-snap-align: start;
 }

@@ -7,10 +7,25 @@ import {
   FaCertificate,
 } from "react-icons/fa";
 import TimeLine from "../../components/TimeLine";
-import { Playfair_Display, Rubik } from "next/font/google";
+import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 
-const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
-const rubik = Rubik({ subsets: ["latin"] });
+const sourceSansPro = Source_Sans_Pro({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--source-sans-pro",
+});
+
+const rubik = Rubik({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--rubik",
+});
+
+const playfairDisplay = Playfair_Display({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--playfair-display",
+});
 
 const TIMELINE = [
   {
@@ -45,7 +60,7 @@ const TIMELINE = [
 
 function History() {
   return (
-    <div className={styles.container}>
+    <div className={`${rubik.className} ${styles.container}`}>
       <header className={styles.header}>
         <div className={styles.content}>
           <h1>History</h1>
@@ -56,9 +71,9 @@ function History() {
           </p>
         </div>
       </header>
-      <h2 className={`${playfairDisplay.className} ${styles.h2}`}>Timeline</h2>
+      <h2 className={`${sourceSansPro.className} ${styles.h2}`}>Timeline</h2>
       <TimeLine
-        className={`${rubik.className} ${styles.timeline}`}
+        className={`${sourceSansPro.variable} ${rubik.variable}  ${playfairDisplay.variable} ${styles.timeline}`}
         timeline={TIMELINE}
       />
     </div>

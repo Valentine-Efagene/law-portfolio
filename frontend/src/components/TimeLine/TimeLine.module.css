@@ -4,6 +4,7 @@
   gap: 2rem;
   position: relative;
   --card-bg: beige;
+  font-family: "Inter", sans-serif;
 }
 
 .details {
@@ -14,11 +15,14 @@
 }
 
 .container h3 {
-  font-weight: 600;
+  font-family: var(--playfair-display), sans-serif;
 }
 
 .container h4 {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
   font-weight: 500;
+  font-family: var(--rubik), sans-serif;
 }
 
 .line {
@@ -52,6 +56,10 @@
   background-color: var(--card-bg);
   border-radius: 0.2rem;
   position: relative;
+}
+
+.card p {
+  line-height: 1.5;
 }
 
 .details:nth-child(even) .card::before {
