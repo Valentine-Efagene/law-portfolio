@@ -15,7 +15,7 @@ export default function Hero({ className }: IHeroProps) {
   return (
     <section className={`${className} ${styles.container}`}>
       <h1 className={`${playfairDisplay.className} ${styles.headline}`}>
-        Really Unbelievable Solutions for & all Legal Cases.
+        Really Unbelievable Solutions for all Legal Cases.
       </h1>
       <p className={`${sourceSansPro.className} ${styles.subHeadline}`}>
         Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
