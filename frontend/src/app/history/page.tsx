@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import TimeLine from "../../components/TimeLine";
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
+import Layout from "@/components/Layout";
 
 const sourceSansPro = Source_Sans_Pro({
   weight: "400",
@@ -60,23 +61,25 @@ const TIMELINE = [
 
 function History() {
   return (
-    <div className={`${rubik.className} ${styles.container}`}>
-      <header className={styles.header}>
-        <div className={styles.content}>
-          <h1>History</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
-            error explicabo modi quasi quidem, nostrum assumenda reiciendis,
-            dolorum tempora excepturi dignissimos aut.
-          </p>
-        </div>
-      </header>
-      <h2 className={`${sourceSansPro.className} ${styles.h2}`}>Timeline</h2>
-      <TimeLine
-        className={`${sourceSansPro.variable} ${rubik.variable}  ${playfairDisplay.variable} ${styles.timeline}`}
-        timeline={TIMELINE}
-      />
-    </div>
+    <Layout>
+      <div className={`${rubik.className} ${styles.container}`}>
+        <header className={styles.header}>
+          <div className={styles.content}>
+            <h1>History</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
+              error explicabo modi quasi quidem, nostrum assumenda reiciendis,
+              dolorum tempora excepturi dignissimos aut.
+            </p>
+          </div>
+        </header>
+        <h2 className={`${sourceSansPro.className} ${styles.h2}`}>Timeline</h2>
+        <TimeLine
+          className={`${sourceSansPro.variable} ${rubik.variable}  ${playfairDisplay.variable} ${styles.timeline}`}
+          timeline={TIMELINE}
+        />
+      </div>
+    </Layout>
   );
 }
 

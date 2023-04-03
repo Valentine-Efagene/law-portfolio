@@ -24,6 +24,7 @@ import DesktopNav from "@/components/nav/DesktopNav";
 import MobileNav from "@/components/nav/MobileNav";
 import Footer from "@/components/home/Footer";
 import ContactBar from "@/components/nav/SocialBar/ContactBar";
+import Layout from "@/components/Layout";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -133,90 +134,95 @@ const Post = ({ post }: IPostProps) => {
   };
 
   return (
-    <div className={styles.container}>
-      <ContactBar />
-      <DesktopNav />
-      <MobileNav />
-      <article>
-        <h1 className={playfairDisplay.className}>{title}</h1>
-        <header className={styles.header}>
-          {mainImage && (
-            <div className={styles.mainImageWrapper}>
-              <Image
-                fill
-                className={styles.mainImage}
-                alt=""
-                src={SanityHelper.urlFor(mainImage)
-                  .fit("max")
-                  .auto("format")
-                  .url()}
-              />
-            </div>
-          )}
-          <div className={styles.authorNCat}>
-            {authorImage && (
-              <div className={styles.author}>
-                <img
-                  className={styles.authorImage}
-                  src={urlFor(authorImage).width(50).url()}
-                  alt={`${name}'s picture`}
+    <Layout>
+      <div className={styles.container}>
+        <ContactBar />
+        <DesktopNav />
+        <MobileNav />
+        <article>
+          <h1 className={playfairDisplay.className}>{title}</h1>
+          <header className={styles.header}>
+            {mainImage && (
+              <div className={styles.mainImageWrapper}>
+                <Image
+                  fill
+                  className={styles.mainImage}
+                  alt=""
+                  src={SanityHelper.urlFor(mainImage)
+                    .fit("max")
+                    .auto("format")
+                    .url()}
                 />
-                <div className={styles.dateNName}>
-                  {name && (
-                    <div className={`${rubik.className} ${styles.authorName}`}>
-                      {name}
-                    </div>
-                  )}
-                  {date && (
-                    <div className={sourceSansPro.className}>
-                      {new Date(date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </div>
-                  )}
-                </div>
               </div>
             )}
-            {categories && (
-              <ul className={styles.categories}>
-                {categories &&
-                  categories.map((category) => (
-                    <li className={styles.category} key={category}>
-                      {category}
-                    </li>
-                  ))}
-              </ul>
-            )}
+            <div className={styles.authorNCat}>
+              {authorImage && (
+                <div className={styles.author}>
+                  <img
+                    className={styles.authorImage}
+                    src={urlFor(authorImage).width(50).url()}
+                    alt={`${name}'s picture`}
+                  />
+                  <div className={styles.dateNName}>
+                    {name && (
+                      <div
+                        className={`${rubik.className} ${styles.authorName}`}
+                      >
+                        {name}
+                      </div>
+                    )}
+                    {date && (
+                      <div className={sourceSansPro.className}>
+                        {new Date(date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {categories && (
+                <ul className={styles.categories}>
+                  {categories &&
+                    categories.map((category) => (
+                      <li className={styles.category} key={category}>
+                        {category}
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
+          </header>
+          <div className={styles.body}>
+            <PortableText value={body} components={ptComponents} />
           </div>
-        </header>
-        <div className={styles.body}>
-          <PortableText value={body} components={ptComponents} />
-        </div>
-      </article>
-      {submitted ? (
-        <div className={styles.commentFeedback}>
-          <h2>Comment Submitted</h2>
-          <p>
-            Your comment is being reviewed, and will be displayed once approved
-          </p>
-        </div>
-      ) : (
-        <section className={styles.commentSection}>
-          <h2>Comments</h2>
-          <CommentForm
-            isLoading={isSubmittingComment}
-            error={error}
-            data={data}
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-          />
-        </section>
-      )}
-      <Comments className={styles.comments} comments={comments} />
-      <Footer className={styles.footer} />
-    </div>
+        </article>
+        {submitted ? (
+          <div className={styles.commentFeedback}>
+            <h2>Comment Submitted</h2>
+            <p>
+              Your comment is being reviewed, and will be displayed once
+              approved
+            </p>
+          </div>
+        ) : (
+          <section className={styles.commentSection}>
+            <h2>Comments</h2>
+            <CommentForm
+              isLoading={isSubmittingComment}
+              error={error}
+              data={data}
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+            />
+          </section>
+        )}
+        <Comments className={styles.comments} comments={comments} />
+        <Footer className={styles.footer} />
+      </div>
+    </Layout>
   );
 };
 
