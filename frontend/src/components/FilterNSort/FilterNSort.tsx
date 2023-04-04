@@ -74,6 +74,7 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
     <div
       className={`${className} ${sourceSansPro.className} ${styles.container}`}
     >
+      {filterField}
       <details>
         <summary className={`${rubik.className}`}>
           <span>Filter & Sort</span>{" "}
@@ -89,17 +90,18 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
               id="authors"
               value="authors"
             />
-            <label htmlFor="author">
+            <label htmlFor="authors">
               Author <FaChevronDown className={styles.icon} />
             </label>
             <input
               hidden
+              onChange={handleFilterFieldChange}
               type="radio"
               name="filter"
               id="categories"
               value="categories"
             />
-            <label htmlFor="category">
+            <label htmlFor="categories">
               Category <FaChevronDown className={styles.icon} />
             </label>
           </div>
@@ -124,8 +126,10 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
           {filterField === "authors" &&
             authors.map(({ _id, name }) => (
               <CustomCheck
+                className={styles.checkPill}
                 label={name}
                 key={_id}
+                checked={selectedAuthors.find((id) => id === _id) != null}
                 id={_id}
                 name={_id}
                 value={_id}
@@ -136,7 +140,9 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
           {filterField === "categories" &&
             categories.map(({ _id, title }) => (
               <CustomCheck
+                className={styles.checkPill}
                 key={_id}
+                checked={selectedCategories.find((id) => id === _id) != null}
                 label={title}
                 id={_id}
                 name={_id}

@@ -72,3 +72,14 @@
 .container summary::marker {
   display: none;
 }
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.checkPill {
+  margin-right: auto;
+  text-align: start;
+}

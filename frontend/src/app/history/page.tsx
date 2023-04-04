@@ -65,7 +65,7 @@ function History() {
       <div className={`${rubik.className} ${styles.container}`}>
         <header className={styles.header}>
           <div className={styles.content}>
-            <h1>History</h1>
+            <h1 className={playfairDisplay.className}>History</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
               error explicabo modi quasi quidem, nostrum assumenda reiciendis,

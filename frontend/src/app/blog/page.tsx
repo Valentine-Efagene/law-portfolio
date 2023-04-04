@@ -32,7 +32,7 @@ const allAuthorsQuery = groq`*[_type == "author"] | order(name) {
   name
 }`;
 
-const allCatsQuery = groq`*[_type == "category"] | order(name) {
+const allCatsQuery = groq`*[_type == "category"] | order(title) {
   _id,
   title
 }`;
@@ -54,7 +54,7 @@ export default async function Blog() {
       <div className={styles.container}>
         <header className={styles.header}>
           <div className={styles.content}>
-            <h1>Suit Blog</h1>
+            <h1 className={playfairDisplay.className}>Suit Blog</h1>
             <p className={sourceSansPro.className}>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
               error explicabo modi quasi quidem, nostrum assumenda reiciendis,
