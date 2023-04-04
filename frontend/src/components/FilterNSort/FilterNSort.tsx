@@ -36,14 +36,23 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  const [filterField, setFilterField] = useState<"authors" | "categories">(
-    "authors"
-  );
+  const [filterField, setFilterField] = useState<
+    "authors" | "categories" | null
+  >("authors");
 
   const handleFilterFieldChange: ChangeEventHandler = (e) => {
-    setFilterField(
-      (e.target as HTMLInputElement)?.value as "authors" | "categories"
-    );
+    setFilterField((prevState) => {
+      const value = (e.target as HTMLInputElement)?.value as
+        | "authors"
+        | "categories";
+      console.log({ value, prevState });
+
+      if (prevState === value) {
+        return null;
+      }
+
+      return value;
+    });
   };
 
   const handleCheckAuthorChange: ChangeEventHandler = (e) => {
@@ -74,7 +83,6 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
     <div
       className={`${className} ${sourceSansPro.className} ${styles.container}`}
     >
-      {filterField}
       <details>
         <summary className={`${rubik.className}`}>
           <span>Filter & Sort</span>{" "}

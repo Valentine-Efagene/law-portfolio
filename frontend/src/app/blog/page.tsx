@@ -43,16 +43,19 @@ export const metadata = {
 };
 
 export default async function Blog() {
-  const posts: IPost[] = await client.fetch(query);
-  const authors: { name: string; _id: string }[] = await client.fetch(
-    allAuthorsQuery
-  );
-  const categories: { title: string; _id: string }[] = await client.fetch(
-    allCatsQuery
-  );
+  const postsPromise: Promise<IPost[]> = client.fetch(query);
+  const authorsPromise: Promise<{ name: string; _id: string }[]> =
+    client.fetch(allAuthorsQuery);
+  const categoriesPromise: Promise<{ title: string; _id: string }[]> =
+    client.fetch(allCatsQuery);
 
   // For test
-  //const demoPosts = Array(5).fill(posts[0]);
+  //const posts = Array(5).fill(posts[0]);
+  const [posts, authors, categories] = await Promise.all([
+    postsPromise,
+    authorsPromise,
+    categoriesPromise,
+  ]);
 
   return (
     <Layout>

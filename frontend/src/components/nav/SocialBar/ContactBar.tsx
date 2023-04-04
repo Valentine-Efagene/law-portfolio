@@ -1,8 +1,14 @@
 import Link from "next/link";
-import React, { useState } from "react";
 import styles from "./ContactBar.module.css";
 import { Rubik } from "next/font/google";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaPhone,
+  FaTwitter,
+} from "react-icons/fa";
 
 interface IContactBarProps {
   className?: string;
@@ -16,11 +22,12 @@ export default function ContactBar({ className }: IContactBarProps) {
       <div className={styles.content}>
         <div className={styles.left}>
           <Link href="/" className={styles.navItem}>
-            Call Us: {process.env.NEXT_PUBLIC_TEL}
-          </Link>{" "}
+            <FaPhone className={styles.icon} /> {process.env.NEXT_PUBLIC_TEL}
+          </Link>
           <span>|</span>
           <Link href="/blog" className={styles.navItem}>
-            Email Us: {process.env.NEXT_PUBLIC_EMAIL}
+            <FaEnvelope className={styles.icon} />
+            {process.env.NEXT_PUBLIC_EMAIL}
           </Link>
         </div>
         <div className={styles.right}>

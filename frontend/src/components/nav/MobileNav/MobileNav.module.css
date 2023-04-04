@@ -32,6 +32,7 @@
 }
 
 .menu {
+  overflow-x: hidden; /* Otherwise causes page to overflow */
   position: fixed;
   display: flex;
   flex-direction: column;

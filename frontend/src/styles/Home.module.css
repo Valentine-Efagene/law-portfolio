@@ -5,7 +5,7 @@
   align-items: center;
   background-color: white;
   margin-inline: auto;
-  max-width: 1400px;
+  width: min(100%, 1400px);
   margin: auto;
   scroll-snap-type: y proximity;
 }
