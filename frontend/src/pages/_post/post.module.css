@@ -1,0 +1,128 @@
+.container {
+  --secondary-max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr;
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  margin-inline: auto;
+  background-color: #ffffff;
+  padding-bottom: 4rem;
+}
+
+.container > article {
+  display: grid;
+  grid-template-columns: 1fr;
+  font-family: "Inter", sans-serif;
+  margin-inline: auto;
+  background-color: #ffffff;
+}
+
+.commentSection h2 {
+  margin-bottom: 2rem;
+}
+
+.authorNCat,
+.mainImageWrapper,
+.container h1 {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  width: min(100%, var(--max-width));
+}
+
+.body,
+.container .header h1,
+.comments,
+.commentSection {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  width: min(100%, var(--secondary-max-width));
+}
+
+.comments {
+  margin-top: 3rem;
+}
+
+.container .header {
+  overflow: hidden;
+}
+
+.container h1 {
+  font-size: min(10vw, 3rem);
+  color: rgb(75, 75, 75);
+  padding-block: 1rem;
+}
+
+.authorNCat {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  flex-flow: row wrap;
+}
+
+.categories {
+  display: flex;
+  list-style: none;
+  width: fit-content;
+  justify-content: flex-start;
+  margin-block: auto;
+  height: fit-content;
+}
+
+.category {
+  padding: 0.3rem 0.7rem;
+  color: rgb(40, 40, 40);
+  background-color: rgba(128, 128, 128, 0.01);
+  border: 1px solid rgba(56, 56, 56, 0.685);
+  border-radius: 0.4rem;
+}
+
+.mainImageWrapper {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  max-height: 50vh;
+}
+
+.mainImageWrapper > img {
+  object-fit: cover;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.author > img {
+  margin-right: 1rem;
+}
+
+.authorImage {
+  border-radius: 50%;
+}
+
+.body {
+  margin-block: 1rem;
+  padding-block: 1.25rem;
+  display: grid;
+}
+
+.bodyImage {
+  margin-block: 1rem;
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+}
+
+.footer {
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .mainImageWrapper {
+    max-height: 60vh;
+  }
+}
+
+@media (max-width: 768px) {
+}

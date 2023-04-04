@@ -37,6 +37,11 @@ const allCatsQuery = groq`*[_type == "category"] | order(title) {
   title
 }`;
 
+export const metadata = {
+  title: "Blog",
+  description: "A list of blog posts",
+};
+
 export default async function Blog() {
   const posts: IPost[] = await client.fetch(query);
   const authors: { name: string; _id: string }[] = await client.fetch(

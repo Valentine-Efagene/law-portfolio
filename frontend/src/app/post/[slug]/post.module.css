@@ -17,10 +17,6 @@
   background-color: #ffffff;
 }
 
-.commentSection h2 {
-  margin-bottom: 2rem;
-}
-
 .authorNCat,
 .mainImageWrapper,
 .container h1 {
@@ -30,10 +26,8 @@
 }
 
 .body,
-.commentFeedback,
 .container .header h1,
-.comments,
-.commentSection {
+.comments {
   margin-inline: auto;
   padding-inline: 1.25rem;
   width: min(100%, var(--secondary-max-width));
@@ -41,6 +35,10 @@
 
 .comments {
   margin-top: 3rem;
+}
+
+.comments h2 {
+  margin-bottom: 1rem;
 }
 
 .container .header {
@@ -113,11 +111,6 @@
   margin-block: 1rem;
   width: min(100%, var(--max-width));
   margin-inline: auto;
-}
-
-.commentFeedback {
-  background-color: var(--color-primary);
-  padding-block: 2rem;
 }
 
 .footer {

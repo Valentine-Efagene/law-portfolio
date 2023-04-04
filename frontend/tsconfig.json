@@ -29,7 +29,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/pages/_app.js",
-    "src/pages/post/[slug].tsx",
+    "src/pages/_post/[slug].tsx",
     ".next/types/**/*.ts",
     "src/components/forms/CommentForm"
   ],

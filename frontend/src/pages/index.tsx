@@ -11,6 +11,11 @@ import ContactBar from "@/components/nav/SocialBar/ContactBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+  title: process.env.PROJECT_NAME,
+  description: "Landing page",
+};
+
 export default function Home() {
   return (
     <>
@@ -34,3 +39,4 @@ export default function Home() {
     </>
   );
 }
+import { env } from "process";

@@ -59,6 +59,11 @@ const TIMELINE = [
   },
 ];
 
+export const metadata = {
+  title: "History",
+  description: "Professional history",
+};
+
 function History() {
   return (
     <Layout>

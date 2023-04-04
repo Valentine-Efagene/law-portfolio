@@ -3,27 +3,18 @@
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
-import client from "../../../client";
+import client from "../../../../client";
 import styles from "./post.module.css";
 import { ICategory, IComment, IPost, ISanityImage } from "@/helpers/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
+import { Metadata } from "next";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import Image from "@/components/common/Image";
 import SanityHelper from "@/helpers/SanityHelper";
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  FormEvent,
-  FormEventHandler,
-  useState,
-} from "react";
 import CommentForm from "@/components/forms/CommentForm/CommentForm";
 import Comments from "@/components/listings/Comments";
-import DesktopNav from "@/components/nav/DesktopNav";
-import MobileNav from "@/components/nav/MobileNav";
 import Footer from "@/components/home/Footer";
-import ContactBar from "@/components/nav/SocialBar/ContactBar";
 import Layout from "@/components/Layout";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
@@ -60,11 +51,47 @@ const ptComponents = {
   },
 };
 
+const query = groq`*[_type == "post" && slug.current == $slug][0]{
+  _id,
+  title,
+  "name": author->name,
+  "categories": categories[]->title,
+  "authorImage": author->image,
+  mainImage,
+  body,
+  _createdAt,
+  "comments": *[
+    _type == "comment" && 
+    post._ref == ^._id &&
+    approved == true
+  ]
+}`;
+
 interface IPostProps {
-  post: IPost;
+  params: {
+    slug: string;
+  };
 }
 
-const Post = ({ post }: IPostProps) => {
+export async function generateMetadata({ params: { slug = "" } }: IPostProps) {
+  const titleQuery = groq`*[_type == "post" && slug.current == $slug][0]{
+    title,
+  }.title`;
+
+  const title = await client.fetch(titleQuery, { slug });
+
+  return {
+    title,
+  };
+}
+
+const Post = async ({ params: { slug = "" } }: IPostProps) => {
+  const post: IPost = await client.fetch(query, { slug });
+
+  if (post == null) {
+    return <>404</>;
+  }
+
   const {
     title = "Missing title",
     name = "Missing name",
@@ -77,68 +104,9 @@ const Post = ({ post }: IPostProps) => {
     _createdAt: date,
   } = post;
 
-  const defaultData = {
-    post_id: _id,
-    name: "",
-    email: "",
-    comment: "",
-  };
-
-  const [data, setData] = useState<{
-    post_id: string;
-    name: string;
-    email: string;
-    comment: string;
-  }>(defaultData);
-
-  const handleChange: ChangeEventHandler = (e: ChangeEvent) => {
-    const { name, value } = e.target as HTMLInputElement;
-
-    setData((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
-  const [error, setError] = useState<string | undefined>();
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit: FormEventHandler = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      setIsSubmittingComment(true);
-      const response = await fetch("/api/createComment", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      const {
-        message,
-        error: _err,
-      }: {
-        message: string;
-        error: {
-          statusCode: number;
-        };
-      } = await response.json();
-
-      setError(_err ? message : undefined);
-
-      setData((prevState) => (_err ? prevState : defaultData));
-      setSubmitted(_err ? false : true);
-    } catch (error) {
-      const err = error as { message: string };
-      setError(err.message);
-    } finally {
-      setIsSubmittingComment(false);
-    }
-  };
-
   return (
     <Layout>
       <div className={styles.container}>
-        <ContactBar />
-        <DesktopNav />
-        <MobileNav />
         <article>
           <h1 className={playfairDisplay.className}>{title}</h1>
           <header className={styles.header}>
@@ -199,48 +167,17 @@ const Post = ({ post }: IPostProps) => {
             <PortableText value={body} components={ptComponents} />
           </div>
         </article>
-        {submitted ? (
-          <div className={styles.commentFeedback}>
-            <h2>Comment Submitted</h2>
-            <p>
-              Your comment is being reviewed, and will be displayed once
-              approved
-            </p>
-          </div>
-        ) : (
-          <section className={styles.commentSection}>
-            <h2>Comments</h2>
-            <CommentForm
-              isLoading={isSubmittingComment}
-              error={error}
-              data={data}
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-            />
-          </section>
-        )}
-        <Comments className={styles.comments} comments={comments} />
+        <CommentForm _id={_id} />
+        <div className={styles.comments}>
+          <h2 className={rubik.className}>Comments</h2>
+          <Comments comments={comments} />
+        </div>
         <Footer className={styles.footer} />
       </div>
     </Layout>
   );
 };
 
-const query = groq`*[_type == "post" && slug.current == $slug][0]{
-  _id,
-  title,
-  "name": author->name,
-  "categories": categories[]->title,
-  "authorImage": author->image,
-  mainImage,
-  body,
-  _createdAt,
-  "comments": *[
-    _type == "comment" && 
-    post._ref == ^._id &&
-    approved == true
-  ]
-}`;
 export async function getStaticPaths() {
   const paths = await client.fetch(
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
@@ -252,6 +189,7 @@ export async function getStaticPaths() {
   };
 }
 
+/*
 export const getStaticProps = async (context: any) => {
   // It's important to default the slug so that it doesn't return "undefined"
   const { slug = "" } = context.params;
@@ -263,4 +201,5 @@ export const getStaticProps = async (context: any) => {
     revalidate: 60,
   };
 };
+*/
 export default Post;
