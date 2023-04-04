@@ -6,6 +6,9 @@
 .container details {
   font-size: 1rem;
   font-weight: 600;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .filter {
@@ -83,6 +86,22 @@
 .checkPill {
   margin-right: auto;
   text-align: start;
+}
+
+.apply {
+  margin-top: 2rem;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 0.7rem 2rem;
+  border: 1px solid #000000;
+  transition: all 300ms;
+  width: fit-content;
+}
+
+.apply:hover {
+  background-color: #00000000;
+  color: #000000;
 }
 
 @media screen and (max-width: 600px) {

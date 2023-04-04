@@ -5,8 +5,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../../../client";
 import styles from "./post.module.css";
-import { ICategory, IComment, IPost, ISanityImage } from "@/helpers/types";
-import { GetStaticProps, GetStaticPropsContext } from "next";
+import { ICategory, IPost } from "@/helpers/types";
 import { Metadata } from "next";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
@@ -71,9 +70,16 @@ interface IPostProps {
   params: {
     slug: string;
   };
+  searchParams: {
+    authors?: string;
+    categories?: string;
+    dateOrder?: string;
+    titleOrder?: string;
+  };
 }
 
-export async function generateMetadata({ params: { slug = "" } }: IPostProps) {
+export async function generateMetadata({ params }: IPostProps) {
+  const { slug = "" } = params;
   const titleQuery = groq`*[_type == "post" && slug.current == $slug][0]{
     title,
   }.title`;

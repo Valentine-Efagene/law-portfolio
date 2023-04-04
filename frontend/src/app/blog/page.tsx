@@ -14,19 +14,6 @@ const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
-const query = groq`*[_type == "post"] | order(_createdAt desc) {
-  _id,
-  title,
-  author -> {
-      name,
-      image
-  },
-  description,
-  mainImage,
-  slug,
-  _createdAt
-}`;
-
 const allAuthorsQuery = groq`*[_type == "author"] | order(name) {
   _id,
   name
@@ -42,8 +29,92 @@ export const metadata = {
   description: "A list of blog posts",
 };
 
-export default async function Blog() {
-  const postsPromise: Promise<IPost[]> = client.fetch(query);
+interface IBlogProps {
+  params: {
+    slug?: string;
+  };
+  searchParams: {
+    author?: string;
+    category?: string;
+    dateOrder?: string;
+    titleOrder?: string;
+  };
+}
+
+export default async function Blog({ params, searchParams }: IBlogProps) {
+  const { author, category } = searchParams;
+
+  const query = groq`*[_type == "post"] | order(_createdAt desc) {
+    _id,
+    title,
+    author -> {
+        name,
+        image
+    },
+    description,
+    mainImage,
+    slug,
+    _createdAt
+  }`;
+
+  const queryWithAuthorNCat = groq`*[_type == "post" && references($author) && references($category)] | order(_createdAt desc) {
+    _id,
+    title,
+    author -> {
+        name,
+        image
+    },
+    description,
+    mainImage,
+    slug,
+    _createdAt
+  }`;
+
+  const queryWithCat = groq`*[_type == "post" && references($category)] | order(_createdAt desc) {
+    _id,
+    title,
+    author -> {
+        name,
+        image
+    },
+    description,
+    mainImage,
+    slug,
+    _createdAt
+  }`;
+
+  const queryWithAuthor = groq`*[_type == "post" && references($author)] | order(_createdAt desc) {
+    _id,
+    title,
+    author -> {
+        name,
+        image
+    },
+    description,
+    mainImage,
+    slug,
+    _createdAt
+  }`;
+
+  let postsPromise: Promise<IPost[]>;
+
+  if (author && category) {
+    postsPromise = client.fetch(queryWithAuthorNCat, {
+      author,
+      category,
+    });
+  } else if (author) {
+    postsPromise = client.fetch(queryWithAuthor, {
+      author,
+    });
+  } else if (category) {
+    postsPromise = client.fetch(queryWithCat, {
+      author,
+    });
+  } else {
+    postsPromise = client.fetch(query);
+  }
+
   const authorsPromise: Promise<{ name: string; _id: string }[]> =
     client.fetch(allAuthorsQuery);
   const categoriesPromise: Promise<{ title: string; _id: string }[]> =
@@ -67,6 +138,7 @@ export default async function Blog() {
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
               error explicabo modi quasi quidem, nostrum assumenda reiciendis,
               dolorum tempora excepturi dignissimos aut.
+              {JSON.stringify(searchParams)}
             </p>
           </div>
         </header>

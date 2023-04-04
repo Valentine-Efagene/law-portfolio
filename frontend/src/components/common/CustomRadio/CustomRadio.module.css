@@ -1,0 +1,33 @@
+.container {
+  display: block;
+}
+
+.container label {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.container label .on,
+.container label .off {
+  margin-left: 0.7rem;
+}
+
+.container input[type="radio"] + label .on {
+  display: none;
+}
+
+.container input[type="radio"] + label .off {
+  display: block;
+}
+
+.container input[type="radio"]:checked + label .on {
+  display: block;
+}
+
+.container input[type="radio"]:checked + label .off {
+  display: none;
+}

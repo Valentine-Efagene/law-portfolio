@@ -1,12 +1,14 @@
 "use client";
-import React, { useState, ChangeEventHandler, ChangeEvent } from "react";
+
+import React, { useState, ChangeEventHandler, FormEventHandler } from "react";
 import { BiFilter } from "react-icons/bi";
-import { FaRegCheckSquare } from "react-icons/fa";
 import styles from "./FilterNSort.module.css";
+import { useRouter } from "next/navigation";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import { FaChevronDown } from "react-icons/fa";
 import CustomCheck from "../common/CustomCheck";
+import Link from "next/link";
 
 const sourceSansPro = Source_Sans_Pro({
   weight: "400",
@@ -30,22 +32,22 @@ interface IFilterSortProps {
   authors: { name: string; _id: string }[];
   categories: { title: string; _id: string }[];
   className?: string;
+  slug?: string;
 }
 
 function FilterNSort({ authors, categories, className }: IFilterSortProps) {
-  const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [targetAuthor, setTargetAuthor] = useState<string | null>();
+  const [targetCat, setTargetCat] = useState<string | null>();
 
-  const [filterField, setFilterField] = useState<
-    "authors" | "categories" | null
-  >("authors");
+  const [filterField, setFilterField] = useState<"author" | "category" | null>(
+    "author"
+  );
 
   const handleFilterFieldChange: ChangeEventHandler = (e) => {
     setFilterField((prevState) => {
       const value = (e.target as HTMLInputElement)?.value as
-        | "authors"
-        | "categories";
-      console.log({ value, prevState });
+        | "author"
+        | "category";
 
       if (prevState === value) {
         return null;
@@ -55,28 +57,14 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
     });
   };
 
-  const handleCheckAuthorChange: ChangeEventHandler = (e) => {
-    const { checked, value } = e.target as HTMLInputElement;
-
-    setSelectedAuthors((prevState) => {
-      if (checked) {
-        return [...prevState, value];
-      } else {
-        return prevState.filter((id) => id !== value);
-      }
-    });
+  const handleRadioAuthorChange: ChangeEventHandler = (e) => {
+    const { value } = e.target as HTMLInputElement;
+    setTargetAuthor((prevState) => (prevState === value ? null : value));
   };
 
-  const handleCheckCatChange: ChangeEventHandler = (e) => {
-    const { checked, value } = e.target as HTMLInputElement;
-
-    setSelectedCategories((prevState) => {
-      if (checked) {
-        return [...prevState, value];
-      } else {
-        return prevState.filter((id) => id !== value);
-      }
-    });
+  const handleRadioCatChange: ChangeEventHandler = (e) => {
+    const { value } = e.target as HTMLInputElement;
+    setTargetCat((prevState) => (prevState === value ? null : value));
   };
 
   return (
@@ -85,7 +73,8 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
     >
       <details>
         <summary className={`${rubik.className}`}>
-          <span>Filter & Sort</span>{" "}
+          {/* <span>Filter & Sort</span>{" "} */}
+          <span>Filter</span>{" "}
           <BiFilter className={styles.icon} fontSize="1.5rem" />
         </summary>
         <div className={styles.filterNSortBar}>
@@ -93,72 +82,87 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
             <input
               onChange={handleFilterFieldChange}
               hidden
-              type="radio"
+              type="checkbox"
               name="filter"
-              id="authors"
-              value="authors"
+              id="author"
+              value="author"
+              checked={filterField === "author"}
             />
-            <label htmlFor="authors">
+            <label htmlFor="author">
               Author <FaChevronDown className={styles.icon} />
             </label>
             <input
               hidden
+              checked={filterField === "category"}
               onChange={handleFilterFieldChange}
-              type="radio"
+              type="checkbox"
               name="filter"
-              id="categories"
-              value="categories"
+              id="category"
+              value="category"
             />
-            <label htmlFor="categories">
+            <label htmlFor="category">
               Category <FaChevronDown className={styles.icon} />
             </label>
           </div>
-          <div className={styles.sort}>
-            <div>
-              Title{" "}
-              <select name="date_order" id="date_order" defaultValue="desc">
-                <option value="asc">ASC</option>
-                <option value="desc">DESC</option>
-              </select>
-            </div>
-            <div>
-              Date{" "}
-              <select name="name_order" id="name_order" defaultValue="asc">
-                <option value="asc">ASC</option>
-                <option value="desc">DESC</option>
-              </select>
-            </div>
-          </div>
+          {/* <div className={styles.sort}>
+              <div>
+                Title{" "}
+                <select name="date_order" id="date_order" defaultValue="desc">
+                  <option value="asc">ASC</option>
+                  <option value="desc">DESC</option>
+                </select>
+              </div>
+              <div>
+                Date{" "}
+                <select name="name_order" id="name_order" defaultValue="asc">
+                  <option value="asc">ASC</option>
+                  <option value="desc">DESC</option>
+                </select>
+              </div>
+            </div> */}
         </div>
         <div className={styles.content}>
-          {filterField === "authors" &&
+          {filterField === "author" &&
             authors.map(({ _id, name }) => (
               <CustomCheck
                 className={styles.checkPill}
                 label={name}
                 key={_id}
-                checked={selectedAuthors.find((id) => id === _id) != null}
+                checked={targetAuthor === _id}
                 id={_id}
                 name={_id}
                 value={_id}
-                onChange={handleCheckAuthorChange}
+                onChange={handleRadioAuthorChange}
               />
             ))}
 
-          {filterField === "categories" &&
+          {filterField === "category" &&
             categories.map(({ _id, title }) => (
               <CustomCheck
                 className={styles.checkPill}
                 key={_id}
-                checked={selectedCategories.find((id) => id === _id) != null}
+                checked={targetCat === _id}
                 label={title}
                 id={_id}
                 name={_id}
                 value={_id}
-                onChange={handleCheckCatChange}
+                onChange={handleRadioCatChange}
               />
             ))}
         </div>
+        <Link
+          href={{
+            pathname: "/blog",
+            query: {
+              author: targetAuthor,
+              category: targetCat,
+            },
+          }}
+          //type="submit"
+          className={`${rubik.className} ${styles.apply}`}
+        >
+          Apply
+        </Link>
       </details>
     </div>
   );
