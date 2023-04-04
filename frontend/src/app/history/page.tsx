@@ -7,8 +7,8 @@ import {
   FaCertificate,
 } from "react-icons/fa";
 import TimeLine from "../../components/TimeLine";
-import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import Layout from "@/components/Layout";
+import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 
 const sourceSansPro = Source_Sans_Pro({
   weight: "400",
@@ -23,7 +23,7 @@ const rubik = Rubik({
 });
 
 const playfairDisplay = Playfair_Display({
-  weight: "400",
+  weight: "600",
   subsets: ["latin"],
   variable: "--playfair-display",
 });

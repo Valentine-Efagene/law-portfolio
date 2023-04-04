@@ -32,6 +32,10 @@
   font-size: min(10vw, 5rem);
 }
 
+.filterNSort {
+  margin-bottom: 3rem;
+}
+
 .container main {
   display: grid;
   grid-template-columns: 1fr;

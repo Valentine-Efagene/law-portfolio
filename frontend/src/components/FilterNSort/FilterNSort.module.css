@@ -4,24 +4,68 @@
 }
 
 .container details {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.filter {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.filter > label {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.filter > label .icon {
+  font-size: 0.8rem;
+}
+
+.filter > label:nth-of-type(2) {
+  margin-left: 1rem;
+}
+
+.filter > input:checked + label > .icon {
+  transform: rotateX(180deg);
+}
+
+.sort {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.sort select {
+  border: none;
+  outline: none;
+}
+
+.sort > div:not(:first-child) {
+  margin-left: 1rem;
+}
+
+.filterNSortBar {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: auto;
+  align-items: center;
+  margin-block: 1rem;
 }
 
 .container summary {
   cursor: pointer;
-  display: grid;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
-.container summary > span{
-    
+.container summary > span {
 }
 
-.container summary > .icon{
-
-}
-
-.container:not(:first-child) {
+.container summary > .icon {
   margin-left: 1rem;
 }
 

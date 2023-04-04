@@ -27,11 +27,24 @@ const query = groq`*[_type == "post"] | order(_createdAt desc) {
   _createdAt
 }`;
 
+const allAuthorsQuery = groq`*[_type == "author"] | order(name) {
+  _id,
+  name
+}`;
+
+const allCatsQuery = groq`*[_type == "category"] | order(name) {
+  _id,
+  title
+}`;
+
 export default async function Blog() {
   const posts: IPost[] = await client.fetch(query);
-  const searchMap = {
-    author: "Authors",
-  };
+  const authors: { name: string; _id: string }[] = await client.fetch(
+    allAuthorsQuery
+  );
+  const categories: { title: string; _id: string }[] = await client.fetch(
+    allCatsQuery
+  );
 
   // For test
   //const demoPosts = Array(5).fill(posts[0]);
@@ -51,7 +64,11 @@ export default async function Blog() {
         </header>
         <main>
           <h2 className={`${styles.h2} ${sourceSansPro.className}`}>Latest</h2>
-          <FilterNSort />
+          <FilterNSort
+            className={styles.filterNSort}
+            authors={authors}
+            categories={categories}
+          />
           <div className={styles.posts}>
             {posts?.map((post) => {
               const {

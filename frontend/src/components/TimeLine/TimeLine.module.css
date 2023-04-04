@@ -16,6 +16,7 @@
 
 .container h3 {
   font-family: var(--playfair-display), sans-serif;
+  font-weight: 600;
 }
 
 .container h4 {
