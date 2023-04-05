@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, MutableRefObject } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 /**
  *
@@ -18,30 +18,34 @@ const useElementOnScreen = (
 
   const [isVisible, setIsVisible] = useState();
 
-  const callback = (entries: any, observer: any) => {
-    const [entry] = entries;
-    setIsVisible((prevState) =>
-      prevState === true ? prevState : entry.isIntersecting
-    );
+  const callback = useCallback(
+    (entries: any, observer: any) => {
+      const [entry] = entries;
+      setIsVisible((prevState) =>
+        prevState === true ? prevState : entry.isIntersecting
+      );
 
-    if (cleanup && isVisible) {
-      observer.disconnect();
-    }
-  };
+      if (cleanup && isVisible) {
+        observer.disconnect();
+      }
+    },
+    [cleanup, isVisible]
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(callback, options);
+    const element = containerRef.current;
 
     if (containerRef.current) {
-      observer.observe(containerRef.current);
+      observer.observe(element);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (element) {
+        observer.unobserve(element);
       }
     };
-  }, [containerRef, options]);
+  }, [containerRef, options, callback]);
 
   return [containerRef, isVisible];
 };

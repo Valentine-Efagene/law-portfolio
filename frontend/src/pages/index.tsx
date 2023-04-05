@@ -7,7 +7,7 @@ import Features from "@/components/home/Features";
 import Footer from "@/components/home/Footer";
 import Specialties from "@/components/home/Specialties";
 import MobileNav from "@/components/nav/MobileNav";
-import ContactBar from "@/components/nav/SocialBar/ContactBar";
+import ContactBar from "@/components/nav/ContactBar/ContactBar";
 
 const inter = Inter({ subsets: ["latin"] });
 

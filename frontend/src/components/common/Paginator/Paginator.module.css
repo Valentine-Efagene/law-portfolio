@@ -1,0 +1,24 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(6, 2rem);
+  align-items: center;
+  gap: 1rem;
+  margin-block: 2rem;
+}
+
+.container > .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  aspect-ratio: 1/1;
+  border-radius: 0.3rem;
+  border: 1px solid #1d1d1d;
+  transition: all 300ms;
+}
+
+.container > .link:hover,
+.active {
+  background-color: #000000;
+  color: #ffffff;
+}

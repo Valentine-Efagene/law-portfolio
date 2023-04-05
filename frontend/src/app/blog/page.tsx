@@ -9,6 +9,7 @@ import SanityHelper from "@/helpers/SanityHelper";
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import FilterNSort from "@/components/FilterNSort";
 import Layout from "@/components/Layout";
+import Paginator from "@/components/common/Paginator";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -29,6 +30,7 @@ export const metadata = {
   description: "A list of blog posts",
 };
 
+export const revalidate = 240;
 interface IBlogProps {
   params: {
     slug?: string;
@@ -138,7 +140,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
               error explicabo modi quasi quidem, nostrum assumenda reiciendis,
               dolorum tempora excepturi dignissimos aut.
-              {JSON.stringify(searchParams)}
+              {/* {JSON.stringify(searchParams)} */}
             </p>
           </div>
         </header>
@@ -218,6 +220,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
               );
             })}
           </div>
+          <Paginator />
         </main>
       </div>
     </Layout>

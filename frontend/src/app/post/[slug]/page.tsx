@@ -24,6 +24,8 @@ function urlFor(source: any) {
   return imageUrlBuilder(client).image(source);
 }
 
+export const revalidate = 240;
+
 const ptComponents = {
   types: {
     // If value is null, check that the image was not partially uploaded
@@ -184,28 +186,4 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
   );
 };
 
-export async function getStaticPaths() {
-  const paths = await client.fetch(
-    groq`*[_type == "post" && defined(slug.current)][].slug.current`
-  );
-
-  return {
-    paths: paths.map((slug: string) => ({ params: { slug } })),
-    fallback: true,
-  };
-}
-
-/*
-export const getStaticProps = async (context: any) => {
-  // It's important to default the slug so that it doesn't return "undefined"
-  const { slug = "" } = context.params;
-  const post: IPost = await client.fetch(query, { slug });
-  return {
-    props: {
-      post,
-    },
-    revalidate: 60,
-  };
-};
-*/
 export default Post;

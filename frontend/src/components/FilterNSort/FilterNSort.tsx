@@ -3,7 +3,6 @@
 import React, { useState, ChangeEventHandler, FormEventHandler } from "react";
 import { BiFilter } from "react-icons/bi";
 import styles from "./FilterNSort.module.css";
-import { useRouter } from "next/navigation";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import { FaChevronDown } from "react-icons/fa";

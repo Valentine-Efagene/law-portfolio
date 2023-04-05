@@ -3,7 +3,6 @@
   top: 0; */
   height: 90px;
   z-index: 2;
-  backdrop-filter: saturate(180%) blur(5px);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -24,6 +23,7 @@
   background-color: #00000000;
   cursor: pointer;
   color: #ffffff;
+  z-index: 3;
 }
 
 .toggle .icon {
@@ -35,16 +35,17 @@
   overflow-x: hidden; /* Otherwise causes page to overflow */
   position: fixed;
   display: flex;
+  min-height: 100vh;
+  height: 100%;
   flex-direction: column;
   top: 0;
   right: 0;
-  height: 100vh;
   background-color: #ffffff;
   color: #000000;
   padding-block: 1.5rem;
   width: 0;
   transition: visibility 300ms, width 500ms;
-  z-index: 3;
+  z-index: 4;
   visibility: collapse;
 }
 
