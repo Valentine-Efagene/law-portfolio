@@ -9,6 +9,7 @@ interface IPost {
     mainImage?: ISanityImage,
     slug: ISlug,
     _createdAt: string,
+    publishedAt: string,
     comments?: IComment[],
     author?: {
         name: string,

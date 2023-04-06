@@ -61,6 +61,7 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   mainImage,
   body,
   _createdAt,
+  publishedAt,
   "comments": *[
     _type == "comment" && 
     post._ref == ^._id &&
@@ -109,7 +110,7 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
     mainImage,
     body = [],
     _id,
-    _createdAt: date,
+    publishedAt: date,
   } = post;
 
   return (

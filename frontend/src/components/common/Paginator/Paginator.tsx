@@ -21,31 +21,85 @@ const rubik = Rubik({ weight: "500", subsets: ["latin"], variable: "--rubik" });
 
 interface IPaginatorProps {
   className?: string;
+  total: number;
+  currentPage?: number;
+  queryParams?: object;
+  limit: number;
 }
 
-function Paginator({ className }: IPaginatorProps) {
+function Paginator({
+  className,
+  total,
+  currentPage,
+  queryParams,
+  limit,
+}: IPaginatorProps) {
   return (
     <div
       className={`${className} ${styles.container} ${sourceSansPro.className}`}
     >
-      <Link href="" className={styles.link}>
-        <FaLongArrowAltLeft className={styles.icon} />
-      </Link>
-      <Link href="" className={`${styles.active} ${styles.link}`}>
-        1
-      </Link>
-      <Link href="" className={styles.link}>
-        2
-      </Link>
-      <Link href="" className={styles.link}>
-        ...
-      </Link>
-      <Link href="" className={styles.link}>
-        23
-      </Link>
-      <Link href="" className={styles.link}>
-        <FaLongArrowAltRight className={styles.icon} />
-      </Link>
+      {currentPage && currentPage > 1 && (
+        <Link
+          href={{
+            pathname: "/blog",
+            query: {
+              ...queryParams,
+              page: currentPage - 1,
+            },
+          }}
+          className={styles.link}
+        >
+          <FaLongArrowAltLeft className={styles.icon} />
+        </Link>
+      )}
+      {total > 1 && (
+        <Link
+          href={{
+            pathname: "/blog",
+            query: {
+              ...queryParams,
+              page: 1,
+            },
+          }}
+          className={`${styles.active} ${styles.link}`}
+        >
+          1
+        </Link>
+      )}
+      {total > 2 && (
+        <Link
+          href={{
+            pathname: "/blog",
+            query: {
+              ...queryParams,
+              page: 2,
+            },
+          }}
+          className={styles.link}
+        >
+          2
+        </Link>
+      )}
+      {total > 5 && <span className={styles.link}>...</span>}
+      {total - 2 > 5 && (
+        <Link
+          href={{
+            pathname: "/blog",
+            query: {
+              ...queryParams,
+              page: total / limit,
+            },
+          }}
+          className={styles.link}
+        >
+          23
+        </Link>
+      )}
+      {currentPage && currentPage < total / limit && (
+        <Link href="" className={styles.link}>
+          <FaLongArrowAltRight className={styles.icon} />
+        </Link>
+      )}
     </div>
   );
 }

@@ -15,6 +15,8 @@ const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
+const LIMIT = 10;
+
 const allAuthorsQuery = groq`*[_type == "author"] | order(name) {
   _id,
   name
@@ -40,94 +42,158 @@ interface IBlogProps {
     category?: string;
     dateOrder?: string;
     titleOrder?: string;
+    page?: number;
   };
 }
 
-export default async function Blog({ params, searchParams }: IBlogProps) {
-  const { author, category } = searchParams;
+async function fetchPaginatedPost(
+  author?: string | null,
+  category?: string | null,
+  page: number = 1,
+  limit: number = 10
+) {
+  const { constraint: authorCatConstraint, variables } =
+    generateAuthorCatContraint(author, category);
 
-  const query = groq`*[_type == "post"] | order(_createdAt desc) {
-    _id,
-    title,
-    author -> {
+  const posts = await client.fetch(
+    groq`*[_type == "post" ${authorCatConstraint}] | order(publishedAt desc) [${
+      (page - 1) * limit
+    }...${(page - 1) * limit + limit}] {
+      _id,
+      title,
+      author -> {
         name,
         image
-    },
-    description,
-    mainImage,
-    slug,
-    _createdAt
-  }`;
+      },
+      description,
+      mainImage,
+      slug,
+      _createdAt,
+      publishedAt
+    }`,
+    variables
+  );
 
-  const queryWithAuthorNCat = groq`*[_type == "post" && references($author) && references($category)] | order(_createdAt desc) {
-    _id,
-    title,
-    author -> {
-        name,
-        image
-    },
-    description,
-    mainImage,
-    slug,
-    _createdAt
-  }`;
+  return posts;
+}
 
-  const queryWithCat = groq`*[_type == "post" && references($category)] | order(_createdAt desc) {
-    _id,
-    title,
-    author -> {
-        name,
-        image
-    },
-    description,
-    mainImage,
-    slug,
-    _createdAt
-  }`;
+function generateAuthorCatContraint(
+  author?: string | null,
+  category?: string | null
+): {
+  constraint: string | null;
+  variables: { [key: string]: string | number | boolean };
+} {
+  const constraint = "";
+  const variables: { [key: string]: string | number } = {};
 
-  const queryWithAuthor = groq`*[_type == "post" && references($author)] | order(_createdAt desc) {
-    _id,
-    title,
-    author -> {
-        name,
-        image
-    },
-    description,
-    mainImage,
-    slug,
-    _createdAt
-  }`;
-
-  let postsPromise: Promise<IPost[]>;
-
-  if (author && category) {
-    postsPromise = client.fetch(queryWithAuthorNCat, {
-      author,
-      category,
-    });
-  } else if (author) {
-    postsPromise = client.fetch(queryWithAuthor, {
-      author,
-    });
-  } else if (category) {
-    postsPromise = client.fetch(queryWithCat, {
-      author,
-    });
-  } else {
-    postsPromise = client.fetch(query);
+  if (author) {
+    constraint.concat(" && references($author) ");
+    variables["author"] = author;
   }
 
+  if (category) {
+    constraint.concat(" && references($category) ");
+    variables["category"] = category;
+  }
+
+  return { constraint: constraint.length > 0 ? constraint : null, variables };
+}
+
+async function fetchTotal(author?: string | null, category?: string | null) {
+  const { constraint, variables } = generateAuthorCatContraint(
+    author,
+    category
+  );
+
+  const total = await client.fetch(
+    groq`count(*[_type == "post" ${constraint}])`,
+    variables
+  );
+
+  return total;
+}
+
+export default async function Blog({ params, searchParams }: IBlogProps) {
+  let lastId: string | null = "";
+  let lastPublishedAt: string | null = "";
+
+  async function fetchNextPage(
+    author?: string | null,
+    category?: string | null
+  ) {
+    if (lastId === null) {
+      return [];
+    }
+
+    const authorCatConstraint = "";
+    let paginationContraint = "";
+    const variables: { [key: string]: string | number } = {};
+
+    if (author) {
+      authorCatConstraint.concat(" && references($author) ");
+      variables["author"] = author;
+    }
+
+    if (category) {
+      authorCatConstraint.concat(" && references($category) ");
+      variables["category"] = category;
+    }
+
+    if (lastPublishedAt && lastId == null) {
+      variables["lastPublishedAt"] = lastPublishedAt;
+      paginationContraint = " && publishedAt > $lastPublishedAt ";
+    } else if (lastPublishedAt && lastId) {
+      variables["lastPublishedAt"] = lastPublishedAt;
+      variables["lastId"] = lastId;
+      paginationContraint = ` && (
+        publishedAt > $lastPublishedAt
+        || (publishedAt == $lastPublishedAt && _id > $lastId)
+      ) `;
+    }
+
+    const posts = await client.fetch(
+      groq`*[_type == "post" ${authorCatConstraint} ${paginationContraint}] | order(publishedAt desc) [0...100] {
+        _id,
+        title,
+        author -> {
+          name,
+          image
+        },
+        description,
+        mainImage,
+        slug,
+        _createdAt,
+        publishedAt
+      }`,
+      variables
+    );
+
+    if (posts.length > 0) {
+      lastPublishedAt = posts[posts.length - 1].publishedAt;
+      lastId = posts[posts.length - 1]._id;
+    } else {
+      lastId = null; // Reached the end
+    }
+    return posts;
+  }
+
+  const { author, category, page = 1 } = searchParams;
+
+  const postsPromise: Promise<IPost[]> = fetchPaginatedPost(author, category);
   const authorsPromise: Promise<{ name: string; _id: string }[]> =
     client.fetch(allAuthorsQuery);
   const categoriesPromise: Promise<{ title: string; _id: string }[]> =
     client.fetch(allCatsQuery);
+  const totalPromise: Promise<number> = fetchTotal();
 
   // For test
   //const posts = Array(5).fill(posts[0]);
-  const [posts, authors, categories] = await Promise.all([
+  const [posts, authors, categories, total] = await Promise.all([
     postsPromise,
     authorsPromise,
     categoriesPromise,
+    totalPromise,
   ]);
 
   return (
@@ -160,7 +226,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
                 author: { name: authorName, image: authorImage } = {},
                 description,
                 title,
-                _createdAt,
+                publishedAt,
               } = post;
 
               return (
@@ -208,7 +274,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
                       <span
                         className={`${sourceSansPro.className} ${styles.date}`}
                       >
-                        {new Date(_createdAt).toLocaleDateString("en-US", {
+                        {new Date(publishedAt).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
@@ -220,7 +286,12 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
               );
             })}
           </div>
-          <Paginator />
+          <Paginator
+            total={total}
+            currentPage={page}
+            queryParams={{ author, category }}
+            limit={LIMIT}
+          />
         </main>
       </div>
     </Layout>
