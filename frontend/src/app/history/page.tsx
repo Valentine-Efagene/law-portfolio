@@ -10,6 +10,12 @@ import TimeLine from "../../components/TimeLine";
 import Layout from "@/components/Layout";
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 
+const playfairDisplay = Playfair_Display({
+  weight: "600",
+  subsets: ["latin"],
+  variable: "--playfair-display",
+});
+
 const sourceSansPro = Source_Sans_Pro({
   weight: "400",
   subsets: ["latin"],
@@ -20,12 +26,6 @@ const rubik = Rubik({
   weight: "400",
   subsets: ["latin"],
   variable: "--rubik",
-});
-
-const playfairDisplay = Playfair_Display({
-  weight: "600",
-  subsets: ["latin"],
-  variable: "--playfair-display",
 });
 
 const TIMELINE = [

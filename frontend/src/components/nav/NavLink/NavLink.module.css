@@ -18,10 +18,11 @@
   background-color: #ccbd99;
   border: none;
   transition-duration: 300ms;
+  position: relative;
 }
 
 .container:hover hr,
-.container:hover.active {
+.container.active hr {
   visibility: visible;
   width: 100%;
 }

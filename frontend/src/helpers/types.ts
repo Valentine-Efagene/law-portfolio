@@ -40,6 +40,11 @@ interface ISlug {
     current: string
 }
 
+interface IContext {
+    params: {
+        slug: string
+    }
+}
 
 interface ICategory {
     _id: string,
@@ -53,4 +58,4 @@ interface ISanityImage {
     asset: SanityAsset
 }
 
-export type { ISanityImage, ICategory, IComment, IPost, ISlug }
+export type { ISanityImage, IContext, ICategory, IComment, IPost, ISlug }

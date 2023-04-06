@@ -1,12 +1,6 @@
-"use client";
 import Link from "next/link";
 import React from "react";
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaLongArrowAltLeft,
-  FaLongArrowAltRight,
-} from "react-icons/fa";
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import styles from "./Paginator.module.css";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";

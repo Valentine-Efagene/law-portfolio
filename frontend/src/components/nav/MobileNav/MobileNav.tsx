@@ -2,23 +2,23 @@
 
 import React, { useState } from "react";
 import styles from "./MobileNav.module.css";
-import Link from "next/link";
-import Image from "@/components/common/Image";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaBlog, FaHome, FaTimes } from "react-icons/fa";
+import { usePathname } from "next/navigation";
+import { GrAchievement } from "react-icons/gr";
 
 interface IMobileNavProps {
   className?: string;
 }
 
-import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
+import { Source_Sans_Pro } from "next/font/google";
 import Logo from "../Logo";
+import Link from "next/link";
 
-const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
-const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
 export default function MobileNav({ className }: IMobileNavProps) {
   const [showMenu, setShowMenu] = useState(false);
+  const pathname = usePathname();
 
   const openMenu = () => {
     setShowMenu(true);
@@ -42,15 +42,33 @@ export default function MobileNav({ className }: IMobileNavProps) {
         <button className={styles.close} onClick={closeMenu}>
           <FaTimes className={styles.icon} />
         </button>
-        <a className={styles.navItem} href="">
+        <Link
+          className={`${pathname === "/" ? styles.active : ""} ${
+            styles.navItem
+          }`}
+          href="/"
+        >
+          <FaHome className={styles.icon} />
           Home
-        </a>
-        <a className={styles.navItem} href="/blog">
+        </Link>
+        <Link
+          className={`${pathname === "/blog" ? styles.active : ""} ${
+            styles.navItem
+          }`}
+          href="/blog"
+        >
+          <FaBlog className={styles.icon} />
           Blog
-        </a>
-        <a className={styles.navItem} href="/history">
+        </Link>
+        <Link
+          className={`${pathname === "/history" ? styles.active : ""} ${
+            styles.navItem
+          }`}
+          href="/history"
+        >
+          <GrAchievement className={styles.icon} />
           History
-        </a>
+        </Link>
       </div>
     </nav>
   );

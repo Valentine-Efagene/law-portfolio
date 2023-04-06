@@ -16,7 +16,7 @@ export const metadata = {
   description: "Landing page",
 };
 
-export default function Home() {
+export default function Home(context: IContext) {
   return (
     <>
       <Head>
@@ -40,3 +40,4 @@ export default function Home() {
   );
 }
 import { env } from "process";
+import { IContext } from "@/helpers/types";
