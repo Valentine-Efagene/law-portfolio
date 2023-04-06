@@ -52,27 +52,34 @@
 }
 
 .authorNCat {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  gap: 2rem;
   margin-top: 2rem;
-  flex-flow: row wrap;
 }
 
 .categories {
+  margin-left: auto;
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
-  width: fit-content;
-  justify-content: flex-start;
-  margin-block: auto;
   height: fit-content;
 }
 
 .category {
   padding: 0.3rem 0.7rem;
+  margin: 0.5rem;
   color: rgb(40, 40, 40);
   background-color: rgba(128, 128, 128, 0.01);
   border: 1px solid rgba(56, 56, 56, 0.685);
   border-radius: 0.4rem;
+  height: fit-content;
+  transition: all 300ms;
+}
+
+.category:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .mainImageWrapper {

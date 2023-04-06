@@ -4,7 +4,7 @@ interface IPost {
     _id: string,
     title: string,
     name?: string,
-    categories?: string[],
+    categories?: ICategory[],
     description?: string,
     mainImage?: ISanityImage,
     slug: ISlug,
@@ -17,13 +17,6 @@ interface IPost {
     },
     authorImage?: ISanityImage,
     body: any[]
-}
-
-interface IComment {
-    _id: string,
-    name: string,
-    email: string,
-    comment: string
 }
 
 interface IComment {
@@ -49,7 +42,10 @@ interface ISlug {
 
 
 interface ICategory {
-    title: string
+    _id: string,
+    title: string,
+    description?: string,
+    slug: ISlug
 }
 
 interface ISanityImage {

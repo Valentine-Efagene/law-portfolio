@@ -34,17 +34,19 @@ function Paginator({
   queryParams,
   limit,
 }: IPaginatorProps) {
+  const page = Number(currentPage);
+
   return (
     <div
       className={`${className} ${styles.container} ${sourceSansPro.className}`}
     >
-      {currentPage && currentPage > 1 && (
+      {page && page > 1 && (
         <Link
           href={{
             pathname: "/blog",
             query: {
               ...queryParams,
-              page: currentPage - 1,
+              page: page - 1,
             },
           }}
           className={styles.link}
@@ -61,7 +63,7 @@ function Paginator({
               page: 1,
             },
           }}
-          className={`${styles.active} ${styles.link}`}
+          className={`${page === 1 ? styles.active : ""} ${styles.link}`}
         >
           1
         </Link>
@@ -75,7 +77,7 @@ function Paginator({
               page: 2,
             },
           }}
-          className={styles.link}
+          className={`${page === 2 ? styles.active : ""} ${styles.link}`}
         >
           2
         </Link>
@@ -90,13 +92,24 @@ function Paginator({
               page: total / limit,
             },
           }}
-          className={styles.link}
+          className={`${page === total / limit ? styles.active : ""}  ${
+            styles.link
+          }`}
         >
-          23
+          {total / limit}
         </Link>
       )}
-      {currentPage && currentPage < total / limit && (
-        <Link href="" className={styles.link}>
+      {page && page < total / limit && (
+        <Link
+          href={{
+            pathname: "/blog",
+            query: {
+              ...queryParams,
+              page: page + 1,
+            },
+          }}
+          className={styles.link}
+        >
           <FaLongArrowAltRight className={styles.icon} />
         </Link>
       )}

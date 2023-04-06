@@ -32,6 +32,18 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        defineField({
+          name: 'caption',
+          title: 'Caption',
+          type: 'string',
+        }),
+        defineField({
+          name: 'attribution',
+          title: 'Attribution',
+          type: 'string',
+        }),
+      ],
     }),
     defineField({
       name: 'categories',

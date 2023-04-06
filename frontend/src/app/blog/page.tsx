@@ -15,7 +15,7 @@ const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 const rubik = Rubik({ weight: "500", subsets: ["latin"] });
 
-const LIMIT = 10;
+const LIMIT: number = Number(process.env.NEXT_PUBLIC_PAGINATION_LIMIT) ?? 10;
 
 const allAuthorsQuery = groq`*[_type == "author"] | order(name) {
   _id,
@@ -47,16 +47,18 @@ interface IBlogProps {
 }
 
 async function fetchPaginatedPost(
+  limit: number,
   author?: string | null,
   category?: string | null,
-  page: number = 1,
-  limit: number = 10
+  page: number = 1
 ) {
-  const { constraint: authorCatConstraint, variables } =
-    generateAuthorCatContraint(author, category);
+  const { constraint, variables } = generateAuthorCatContraint(
+    author,
+    category
+  );
 
   const posts = await client.fetch(
-    groq`*[_type == "post" ${authorCatConstraint}] | order(publishedAt desc) [${
+    groq`*[_type == "post" ${constraint}] | order(publishedAt desc) [${
       (page - 1) * limit
     }...${(page - 1) * limit + limit}] {
       _id,
@@ -84,16 +86,16 @@ function generateAuthorCatContraint(
   constraint: string;
   variables: { [key: string]: string | number | boolean };
 } {
-  const constraint = "";
+  let constraint = "";
   const variables: { [key: string]: string | number } = {};
 
   if (author) {
-    constraint.concat(" && references($author) ");
+    constraint = constraint.concat(" && references($author) ");
     variables["author"] = author;
   }
 
   if (category) {
-    constraint.concat(" && references($category) ");
+    constraint = constraint.concat(" && references($category) ");
     variables["category"] = category;
   }
 
@@ -117,8 +119,9 @@ async function fetchTotal(author?: string | null, category?: string | null) {
 export default async function Blog({ params, searchParams }: IBlogProps) {
   let lastId: string | null = "";
   let lastPublishedAt: string | null = "";
+  let lastPage = 1;
 
-  /*async function fetchNextPage(
+  async function fetchNextPage(
     author?: string | null,
     category?: string | null
   ) {
@@ -126,17 +129,21 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
       return [];
     }
 
-    const authorCatConstraint = "";
+    let authorCatConstraint = "";
     let paginationContraint = "";
     const variables: { [key: string]: string | number } = {};
 
     if (author) {
-      authorCatConstraint.concat(" && references($author) ");
+      authorCatConstraint = authorCatConstraint.concat(
+        " && references($author) "
+      );
       variables["author"] = author;
     }
 
     if (category) {
-      authorCatConstraint.concat(" && references($category) ");
+      authorCatConstraint = authorCatConstraint.concat(
+        " && references($category) "
+      );
       variables["category"] = category;
     }
 
@@ -153,7 +160,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
     }
 
     const posts = await client.fetch(
-      groq`*[_type == "post" ${authorCatConstraint} ${paginationContraint}] | order(publishedAt desc) [0...100] {
+      groq`*[_type == "post" ${authorCatConstraint} ${paginationContraint}] | order(publishedAt desc) [0...${LIMIT}] {
         _id,
         title,
         author -> {
@@ -176,16 +183,21 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
       lastId = null; // Reached the end
     }
     return posts;
-  }*/
+  }
 
   const { author, category, page = 1 } = searchParams;
 
-  const postsPromise: Promise<IPost[]> = fetchPaginatedPost(author, category);
+  const postsPromise: Promise<IPost[]> =
+    Number(page) === Number(lastPage) + 1
+      ? fetchNextPage(author, category)
+      : fetchPaginatedPost(LIMIT, author, category, page);
   const authorsPromise: Promise<{ name: string; _id: string }[]> =
     client.fetch(allAuthorsQuery);
   const categoriesPromise: Promise<{ title: string; _id: string }[]> =
     client.fetch(allCatsQuery);
-  const totalPromise: Promise<number> = fetchTotal();
+  const totalPromise: Promise<number> = fetchTotal(author, category);
+
+  lastPage = page;
 
   // For test
   //const posts = Array(5).fill(posts[0]);
@@ -195,6 +207,9 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
     categoriesPromise,
     totalPromise,
   ]);
+
+  lastId = posts?.[-1]?._id;
+  lastPublishedAt = posts?.[-1]?.publishedAt;
 
   return (
     <Layout>
@@ -206,13 +221,14 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
               error explicabo modi quasi quidem, nostrum assumenda reiciendis,
               dolorum tempora excepturi dignissimos aut.
-              {/* {JSON.stringify(searchParams)} */}
             </p>
           </div>
         </header>
         <main>
           <h2 className={`${styles.h2} ${sourceSansPro.className}`}>Latest</h2>
           <FilterNSort
+            currentAuthor={author}
+            currentCategory={category}
             className={styles.filterNSort}
             authors={authors}
             categories={categories}

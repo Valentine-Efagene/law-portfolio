@@ -29,12 +29,6 @@ export default function DesktopNav({ className }: IDesktopNavProps) {
           <NavLink href="/history" className={styles.navButton}>
             History
           </NavLink>
-          <NavLink href="/profile" className={styles.navButton}>
-            Profile
-          </NavLink>
-          <NavLink href="/about" className={styles.navButton}>
-            About
-          </NavLink>
         </div>
       </nav>
     </div>

@@ -32,11 +32,23 @@ interface IFilterSortProps {
   categories: { title: string; _id: string }[];
   className?: string;
   slug?: string;
+  currentAuthor?: string;
+  currentCategory?: string;
 }
 
-function FilterNSort({ authors, categories, className }: IFilterSortProps) {
-  const [targetAuthor, setTargetAuthor] = useState<string | null>();
-  const [targetCat, setTargetCat] = useState<string | null>();
+function FilterNSort({
+  authors,
+  categories,
+  className,
+  currentAuthor,
+  currentCategory,
+}: IFilterSortProps) {
+  const [targetAuthor, setTargetAuthor] = useState<string | null | undefined>(
+    currentAuthor
+  );
+  const [targetCat, setTargetCat] = useState<string | null | undefined>(
+    currentCategory
+  );
 
   const [filterField, setFilterField] = useState<"author" | "category" | null>(
     "author"
@@ -65,6 +77,16 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
     const { value } = e.target as HTMLInputElement;
     setTargetCat((prevState) => (prevState === value ? null : value));
   };
+
+  const queryParams: { [key: string]: string | number } = {};
+
+  if (targetAuthor) {
+    queryParams["author"] = targetAuthor;
+  }
+
+  if (targetCat) {
+    queryParams["category"] = targetCat;
+  }
 
   return (
     <div
@@ -153,8 +175,7 @@ function FilterNSort({ authors, categories, className }: IFilterSortProps) {
           href={{
             pathname: "/blog",
             query: {
-              author: targetAuthor,
-              category: targetCat,
+              ...queryParams,
             },
           }}
           //type="submit"

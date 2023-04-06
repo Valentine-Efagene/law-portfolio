@@ -15,6 +15,7 @@ import CommentForm from "@/components/forms/CommentForm/CommentForm";
 import Comments from "@/components/listings/Comments";
 import Footer from "@/components/home/Footer";
 import Layout from "@/components/Layout";
+import Link from "next/link";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -56,7 +57,7 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   _id,
   title,
   "name": author->name,
-  "categories": categories[]->title,
+  categories[]->,
   "authorImage": author->image,
   mainImage,
   body,
@@ -164,9 +165,17 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
                 <ul className={styles.categories}>
                   {categories &&
                     categories.map((category) => (
-                      <li className={styles.category} key={category}>
-                        {category}
-                      </li>
+                      <Link
+                        key={category._id}
+                        href={{
+                          pathname: "../blog",
+                          query: {
+                            category: category._id,
+                          },
+                        }}
+                      >
+                        <li className={styles.category}>{category.title}</li>
+                      </Link>
                     ))}
                 </ul>
               )}
