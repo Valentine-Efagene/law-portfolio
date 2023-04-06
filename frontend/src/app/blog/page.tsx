@@ -81,7 +81,7 @@ function generateAuthorCatContraint(
   author?: string | null,
   category?: string | null
 ): {
-  constraint: string | null;
+  constraint: string;
   variables: { [key: string]: string | number | boolean };
 } {
   const constraint = "";
@@ -97,7 +97,7 @@ function generateAuthorCatContraint(
     variables["category"] = category;
   }
 
-  return { constraint: constraint.length > 0 ? constraint : null, variables };
+  return { constraint, variables };
 }
 
 async function fetchTotal(author?: string | null, category?: string | null) {
@@ -118,7 +118,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
   let lastId: string | null = "";
   let lastPublishedAt: string | null = "";
 
-  async function fetchNextPage(
+  /*async function fetchNextPage(
     author?: string | null,
     category?: string | null
   ) {
@@ -176,7 +176,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
       lastId = null; // Reached the end
     }
     return posts;
-  }
+  }*/
 
   const { author, category, page = 1 } = searchParams;
 
