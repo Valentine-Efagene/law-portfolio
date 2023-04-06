@@ -2,7 +2,7 @@ import React from "react";
 import groq from "groq";
 import styles from "./Blog.module.css";
 import client from "../../../client";
-import { IPost } from "@/helpers/types";
+import { ICategory, IPost } from "@/helpers/types";
 import Link from "next/link";
 import Image from "@/components/common/Image";
 import SanityHelper from "@/helpers/SanityHelper";
@@ -24,7 +24,8 @@ const allAuthorsQuery = groq`*[_type == "author"] | order(name) {
 
 const allCatsQuery = groq`*[_type == "category"] | order(title) {
   _id,
-  title
+  title,
+  slug
 }`;
 
 export const metadata = {
@@ -95,7 +96,11 @@ function generateAuthorCatContraint(
   }
 
   if (category) {
-    constraint = constraint.concat(" && references($category) ");
+    constraint = constraint.concat(
+      //" && references($category) "
+      // For SEO
+      "&& $category in categories[]->slug.current"
+    );
     variables["category"] = category;
   }
 
@@ -142,7 +147,9 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
 
     if (category) {
       authorCatConstraint = authorCatConstraint.concat(
-        " && references($category) "
+        //" && references($category) "
+        // For SEO
+        "  && $category in categories[]->slug.current "
       );
       variables["category"] = category;
     }
@@ -193,8 +200,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
       : fetchPaginatedPost(LIMIT, author, category, page);
   const authorsPromise: Promise<{ name: string; _id: string }[]> =
     client.fetch(allAuthorsQuery);
-  const categoriesPromise: Promise<{ title: string; _id: string }[]> =
-    client.fetch(allCatsQuery);
+  const categoriesPromise: Promise<ICategory[]> = client.fetch(allCatsQuery);
   const totalPromise: Promise<number> = fetchTotal(author, category);
 
   lastPage = page;

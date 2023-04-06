@@ -8,6 +8,7 @@ import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import { FaChevronDown } from "react-icons/fa";
 import CustomCheck from "../common/CustomCheck";
 import Link from "next/link";
+import { ICategory } from "@/helpers/types";
 
 const sourceSansPro = Source_Sans_Pro({
   weight: "400",
@@ -29,7 +30,7 @@ const playfairDisplay = Playfair_Display({
 
 interface IFilterSortProps {
   authors: { name: string; _id: string }[];
-  categories: { title: string; _id: string }[];
+  categories: ICategory[];
   className?: string;
   slug?: string;
   currentAuthor?: string;
@@ -158,18 +159,22 @@ function FilterNSort({
             ))}
 
           {filterField === "category" &&
-            categories.map(({ _id, title }) => (
-              <CustomCheck
-                className={styles.checkPill}
-                key={_id}
-                checked={targetCat === _id}
-                label={title}
-                id={_id}
-                name={_id}
-                value={_id}
-                onChange={handleRadioCatChange}
-              />
-            ))}
+            categories.map(({ _id, title, slug }) =>
+              slug == null ? (
+                <></>
+              ) : (
+                <CustomCheck
+                  className={styles.checkPill}
+                  key={_id}
+                  checked={targetCat === slug?.current}
+                  label={title}
+                  id={slug?.current}
+                  name={slug?.current}
+                  value={slug?.current}
+                  onChange={handleRadioCatChange}
+                />
+              )
+            )}
         </div>
         <Link
           href={{

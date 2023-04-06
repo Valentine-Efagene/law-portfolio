@@ -170,7 +170,7 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
                         href={{
                           pathname: "../blog",
                           query: {
-                            category: category._id,
+                            category: category.slug.current,
                           },
                         }}
                       >
