@@ -94,6 +94,7 @@ export default function CommentForm({ _id }: ICommentForm) {
             id="name"
             required
             onChange={handleChange}
+            disabled={isSubmittingComment}
           />
           <input
             placeholder="Email"
@@ -104,11 +105,13 @@ export default function CommentForm({ _id }: ICommentForm) {
             value={email}
             id="email"
             onChange={handleChange}
+            disabled={isSubmittingComment}
           />
           <textarea
             className={styles.input}
             name="comment"
             id="comment"
+            disabled={isSubmittingComment}
             required
             placeholder="Comment"
             rows={10}
