@@ -16,6 +16,7 @@ import Comments from "@/components/listings/Comments";
 import Footer from "@/components/home/Footer";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import DesktopShare from "@/components/DesktopShare";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -181,8 +182,15 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
               )}
             </div>
           </header>
-          <div className={styles.body}>
-            <PortableText value={body} components={ptComponents} />
+          <div className={styles.bodyNShare}>
+            <DesktopShare
+              title={title}
+              url={`/`}
+              className={styles.desktopShare}
+            />
+            <div className={styles.body}>
+              <PortableText value={body} components={ptComponents} />
+            </div>
           </div>
         </article>
         <CommentForm _id={_id} />
@@ -190,7 +198,6 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
           <h2 className={rubik.className}>Comments</h2>
           <Comments comments={comments} />
         </div>
-        <Footer className={styles.footer} />
       </div>
     </Layout>
   );

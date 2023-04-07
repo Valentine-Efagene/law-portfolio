@@ -25,7 +25,7 @@
   width: min(100%, var(--max-width));
 }
 
-.body,
+.bodyNShare,
 .container .header h1,
 .comments {
   margin-inline: auto;
@@ -108,10 +108,26 @@
   border-radius: 50%;
 }
 
-.body {
+.bodyNShare {
+  display: grid;
+  grid-template-columns: auto 100%;
+  gap: 1rem;
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
   margin-block: 1rem;
   padding-block: 1.25rem;
+}
+
+.body {
   display: grid;
+  position: relative;
+}
+
+.desktopShare {
+  position: sticky;
+  left: 5rem;
+  top: 100px;
+  height: fit-content;
 }
 
 .bodyImage {
@@ -131,4 +147,13 @@
 }
 
 @media (max-width: 768px) {
+  .bodyNShare {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .desktopShare {
+    position: static;
+    height: fit-content;
+  }
 }
