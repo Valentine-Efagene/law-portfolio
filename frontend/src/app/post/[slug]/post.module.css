@@ -110,7 +110,7 @@
 
 .bodyNShare {
   display: grid;
-  grid-template-columns: auto 100%;
+  grid-template-columns: 4rem 1fr 4rem;
   gap: 1rem;
   width: min(100%, var(--max-width));
   margin-inline: auto;
@@ -128,6 +128,7 @@
   left: 5rem;
   top: 100px;
   height: fit-content;
+  margin-inline: auto;
 }
 
 .bodyImage {

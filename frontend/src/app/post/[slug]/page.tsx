@@ -192,8 +192,8 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
               <PortableText value={body} components={ptComponents} />
             </div>
           </div>
+          <CommentForm _id={_id} />
         </article>
-        <CommentForm _id={_id} />
         <div className={styles.comments}>
           <h2 className={rubik.className}>Comments</h2>
           <Comments comments={comments} />

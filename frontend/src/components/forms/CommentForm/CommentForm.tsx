@@ -85,6 +85,7 @@ export default function CommentForm({ _id }: ICommentForm) {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className={styles.form}>
+          <h2>Comment</h2>
           <input
             placeholder="Name"
             type="text"
