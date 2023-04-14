@@ -5,18 +5,16 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../../../client";
 import styles from "./post.module.css";
-import { ICategory, IPost } from "@/helpers/types";
-import { Metadata } from "next";
+import { IPost } from "@/helpers/types";
 
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import Image from "@/components/common/Image";
 import SanityHelper from "@/helpers/SanityHelper";
 import CommentForm from "@/components/forms/CommentForm/CommentForm";
 import Comments from "@/components/listings/Comments";
-import Footer from "@/components/home/Footer";
 import Layout from "@/components/Layout";
 import Link from "next/link";
-import DesktopShare from "@/components/DesktopShare";
+import SharePanel from "@/components/SharePanel";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
@@ -134,6 +132,11 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
                 />
               </div>
             )}
+            {mainImage?.caption && (
+              <div className={styles.mainImageCaption}>
+                {mainImage?.caption}
+              </div>
+            )}
             <div className={styles.authorNCat}>
               {authorImage && (
                 <div className={styles.author}>
@@ -183,11 +186,7 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
             </div>
           </header>
           <div className={styles.bodyNShare}>
-            <DesktopShare
-              title={title}
-              url={`/`}
-              className={styles.desktopShare}
-            />
+            <SharePanel title={title} url={`/`} className={styles.sharePanel} />
             <div className={styles.body}>
               <PortableText value={body} components={ptComponents} />
             </div>

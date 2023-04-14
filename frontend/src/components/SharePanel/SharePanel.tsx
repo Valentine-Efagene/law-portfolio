@@ -9,9 +9,9 @@ import {
   FaSpinner,
   FaTwitter,
 } from "react-icons/fa";
-import styles from "./DesktopShare.module.css";
+import styles from "./SharePanel.module.css";
 
-function DesktopShare({
+function SharePanel({
   className,
   title,
   url,
@@ -60,4 +60,4 @@ function DesktopShare({
   );
 }
 
-export default DesktopShare;
+export default SharePanel;

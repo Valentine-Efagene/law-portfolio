@@ -19,6 +19,7 @@
 
 .authorNCat,
 .mainImageWrapper,
+.mainImageCaption,
 .container h1 {
   margin-inline: auto;
   padding-inline: 1.25rem;
@@ -31,6 +32,11 @@
   margin-inline: auto;
   padding-inline: 1.25rem;
   width: min(100%, var(--secondary-max-width));
+}
+
+.mainImageCaption{
+  margin-top: 1rem;
+  color: rgb(82, 82, 82);
 }
 
 .comments {
@@ -123,7 +129,7 @@
   position: relative;
 }
 
-.desktopShare {
+.sharePanel {
   position: sticky;
   left: 5rem;
   top: 100px;
@@ -153,7 +159,7 @@
     flex-direction: column-reverse;
   }
 
-  .desktopShare {
+  .sharePanel {
     position: static;
     height: fit-content;
   }
