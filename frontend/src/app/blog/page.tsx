@@ -194,10 +194,20 @@ const Blog = async ({ params, searchParams }: IBlogProps) => {
 
   const { author, category, page = 1 } = searchParams;
 
-  const postsPromise: Promise<IPost[]> =
-    Number(page) === Number(lastPage) + 1
-      ? fetchNextPage(author, category)
-      : fetchPaginatedPosts(LIMIT, author, category, page);
+  // fetchPaginatedPosts works, but fetchNextPage is buggy
+
+  // const postsPromise: Promise<IPost[]> =
+  //   Number(page) === Number(lastPage) + 1
+  //     ? fetchNextPage(author, category)
+  //     : fetchPaginatedPosts(LIMIT, author, category, page);
+
+  const postsPromise: Promise<IPost[]> = fetchPaginatedPosts(
+    LIMIT,
+    author,
+    category,
+    page
+  );
+
   const authorsPromise: Promise<{ name: string; _id: string }[]> =
     client.fetch(allAuthorsQuery);
   const categoriesPromise: Promise<ICategory[]> = client.fetch(allCatsQuery);
