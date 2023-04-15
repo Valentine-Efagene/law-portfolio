@@ -16,7 +16,7 @@ import Link from "next/link";
 
 const sourceSansPro = Source_Sans_Pro({ weight: "400", subsets: ["latin"] });
 
-export default function MobileNav({ className }: IMobileNavProps) {
+const MobileNav = ({ className }: IMobileNavProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const pathname = usePathname();
 
@@ -72,4 +72,6 @@ export default function MobileNav({ className }: IMobileNavProps) {
       </div>
     </nav>
   );
-}
+};
+
+export default MobileNav;

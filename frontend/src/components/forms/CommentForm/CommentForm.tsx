@@ -15,7 +15,7 @@ interface ICommentForm {
   _id: string;
 }
 
-export default function CommentForm({ _id }: ICommentForm) {
+const CommentForm = ({ _id }: ICommentForm) => {
   const [isSubmittingComment, setIsSubmittingComment] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const [submitted, setSubmitted] = useState(false);
@@ -131,4 +131,6 @@ export default function CommentForm({ _id }: ICommentForm) {
       )}
     </div>
   );
-}
+};
+
+export default CommentForm;

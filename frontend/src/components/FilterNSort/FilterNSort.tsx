@@ -37,13 +37,13 @@ interface IFilterSortProps {
   currentCategory?: string;
 }
 
-function FilterNSort({
+const FilterNSort = ({
   authors,
   categories,
   className,
   currentAuthor,
   currentCategory,
-}: IFilterSortProps) {
+}: IFilterSortProps) => {
   const [targetAuthor, setTargetAuthor] = useState<string | null | undefined>(
     currentAuthor
   );
@@ -191,6 +191,6 @@ function FilterNSort({
       </details>
     </div>
   );
-}
+};
 
 export default FilterNSort;

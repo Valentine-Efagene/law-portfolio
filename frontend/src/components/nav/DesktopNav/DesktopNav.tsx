@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import NavLink from "../NavLink/NavLink";
 import styles from "./DesktopNav.module.css";
 import { Rubik } from "next/font/google";
@@ -10,7 +9,7 @@ interface IDesktopNavProps {
 
 const rubik = Rubik({ subsets: ["latin"] });
 
-export default function DesktopNav({ className }: IDesktopNavProps) {
+const DesktopNav = ({ className }: IDesktopNavProps) => {
   return (
     <div className={`${className} ${styles.container} ${rubik.className}`}>
       <nav className={styles.nav}>
@@ -29,4 +28,6 @@ export default function DesktopNav({ className }: IDesktopNavProps) {
       </nav>
     </div>
   );
-}
+};
+
+export default DesktopNav;

@@ -13,7 +13,7 @@ interface ICustomCheckProps {
   className?: string;
 }
 
-function CustomCheck({
+const CustomCheck = ({
   onChange,
   value,
   name,
@@ -21,7 +21,7 @@ function CustomCheck({
   checked = false,
   label,
   className,
-}: ICustomCheckProps) {
+}: ICustomCheckProps) => {
   return (
     <div className={`${className} ${styles.container}`}>
       <input
@@ -40,6 +40,6 @@ function CustomCheck({
       </label>
     </div>
   );
-}
+};
 
 export default CustomCheck;

@@ -1,3 +1,4 @@
+import { IContext } from "@/helpers/types";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
@@ -16,7 +17,7 @@ export const metadata = {
   description: "Landing page",
 };
 
-export default function Home(context: IContext) {
+const Home = (context: IContext) => {
   return (
     <>
       <Head>
@@ -38,6 +39,6 @@ export default function Home(context: IContext) {
       </main>
     </>
   );
-}
-import { env } from "process";
-import { IContext } from "@/helpers/types";
+};
+
+export default Home;

@@ -13,7 +13,7 @@ interface ICustomCheckProps {
   className?: string;
 }
 
-function CustomRadio({
+const CustomRadio = ({
   onChange,
   value,
   name,
@@ -21,7 +21,7 @@ function CustomRadio({
   checked = false,
   label,
   className,
-}: ICustomCheckProps) {
+}: ICustomCheckProps) => {
   return (
     <div className={`${className} ${styles.container}`}>
       <input
@@ -40,6 +40,6 @@ function CustomRadio({
       </label>
     </div>
   );
-}
+};
 
 export default CustomRadio;

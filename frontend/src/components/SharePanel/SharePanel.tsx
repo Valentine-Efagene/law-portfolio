@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import React, { useState } from "react";
 import {
@@ -11,7 +12,7 @@ import {
 } from "react-icons/fa";
 import styles from "./SharePanel.module.css";
 
-function SharePanel({
+const SharePanel = ({
   className,
   title,
   url,
@@ -19,7 +20,7 @@ function SharePanel({
   className?: string;
   title: string;
   url: string;
-}) {
+}) => {
   const [shared, setShared] = useState(false);
   const [sharing, setSharing] = useState(false);
 
@@ -58,6 +59,6 @@ function SharePanel({
       {sharing && <FaSpinner className={`fa-pulse ${styles.status}`} />}
     </div>
   );
-}
+};
 
 export default SharePanel;

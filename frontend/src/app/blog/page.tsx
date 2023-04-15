@@ -47,7 +47,7 @@ interface IBlogProps {
   };
 }
 
-async function fetchPaginatedPost(
+async function fetchPaginatedPosts(
   limit: number,
   author?: string | null,
   category?: string | null,
@@ -121,7 +121,7 @@ async function fetchTotal(author?: string | null, category?: string | null) {
   return total;
 }
 
-export default async function Blog({ params, searchParams }: IBlogProps) {
+const Blog = async ({ params, searchParams }: IBlogProps) => {
   let lastId: string | null = "";
   let lastPublishedAt: string | null = "";
   let lastPage = 1;
@@ -163,14 +163,14 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
       paginationContraint = ` && (
         publishedAt > $lastPublishedAt
         || (publishedAt == $lastPublishedAt && _id > $lastId)
-      ) `;
+        ) `;
     }
 
     const posts = await client.fetch(
       groq`*[_type == "post" ${authorCatConstraint} ${paginationContraint}] | order(publishedAt desc) [0...${LIMIT}] {
-        _id,
-        title,
-        author -> {
+          _id,
+          title,
+          author -> {
           name,
           image
         },
@@ -197,7 +197,7 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
   const postsPromise: Promise<IPost[]> =
     Number(page) === Number(lastPage) + 1
       ? fetchNextPage(author, category)
-      : fetchPaginatedPost(LIMIT, author, category, page);
+      : fetchPaginatedPosts(LIMIT, author, category, page);
   const authorsPromise: Promise<{ name: string; _id: string }[]> =
     client.fetch(allAuthorsQuery);
   const categoriesPromise: Promise<ICategory[]> = client.fetch(allCatsQuery);
@@ -318,4 +318,6 @@ export default async function Blog({ params, searchParams }: IBlogProps) {
       </div>
     </Layout>
   );
-}
+};
+
+export default Blog;

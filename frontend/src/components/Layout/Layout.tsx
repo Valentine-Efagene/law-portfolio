@@ -4,18 +4,16 @@ import Footer from "@/components/home/Footer";
 import MobileNav from "@/components/nav/MobileNav";
 import ContactBar from "@/components/nav/ContactBar/ContactBar";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <ContactBar />
-      <DesktopNav className={styles.desktopNav} />
-      <MobileNav className={styles.desktopNav} />
+      <DesktopNav className={styles.nav} />
+      <MobileNav className={styles.nav} />
       {children}
       <Footer />
     </div>
   );
-}
+};
+
+export default RootLayout;
