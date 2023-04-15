@@ -119,24 +119,26 @@ const Post = async ({ params: { slug = "" } }: IPostProps) => {
         <article>
           <h1 className={playfairDisplay.className}>{title}</h1>
           <header className={styles.header}>
-            {mainImage && (
-              <div className={styles.mainImageWrapper}>
-                <Image
-                  fill
-                  className={styles.mainImage}
-                  alt=""
-                  src={SanityHelper.urlFor(mainImage)
-                    .fit("max")
-                    .auto("format")
-                    .url()}
-                />
-              </div>
-            )}
-            {mainImage?.caption && (
-              <div className={styles.mainImageCaption}>
-                {mainImage?.caption}
-              </div>
-            )}
+            <figure>
+              {mainImage && (
+                <div className={styles.mainImageWrapper}>
+                  <Image
+                    fill
+                    className={styles.mainImage}
+                    alt=""
+                    src={SanityHelper.urlFor(mainImage)
+                      .fit("max")
+                      .auto("format")
+                      .url()}
+                  />
+                </div>
+              )}
+              {mainImage?.caption && (
+                <figcaption className={styles.mainImageCaption}>
+                  {mainImage?.caption}
+                </figcaption>
+              )}
+            </figure>
             <div className={styles.authorNCat}>
               {authorImage && (
                 <div className={styles.author}>

@@ -1,1 +1,1 @@
-export { default } from './DesktopShare'
+export { default } from "./SharePanel";
