@@ -34,10 +34,14 @@
   width: min(100%, var(--secondary-max-width));
 }
 
-.mainImageCaption,
-.bodyFigure figcaption {
+.mainImageCaption {
   margin-top: 1rem;
   color: rgb(82, 82, 82);
+}
+
+.bodyFigure figcaption {
+  color: rgb(82, 82, 82);
+  margin-bottom: 1rem;
 }
 
 .comments {
@@ -138,11 +142,16 @@
   margin-inline: auto;
 }
 
-.bodyFigure,
-.bodyImage {
-  margin-block: 1rem;
+.bodyFigure {
   width: min(100%, var(--max-width));
   margin-inline: auto;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.bodyImage {
+  width: 100%;
+  object-fit: cover;
 }
 
 .footer {
