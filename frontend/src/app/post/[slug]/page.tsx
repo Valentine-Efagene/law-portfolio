@@ -35,18 +35,21 @@ const ptComponents = {
       }
 
       return (
-        <img
-          className={styles.bodyImage}
-          alt={value.alt || " "}
-          loading="lazy"
-          src={
-            urlFor(value)
-              //.width(320).height(240)
-              .fit("max")
-              .auto("format")
-              .toString() // Trying out because of typing for img
-          }
-        />
+        <figure className={styles.bodyFigure}>
+          <img
+            className={styles.bodyImage}
+            alt={value.alt || " "}
+            loading="lazy"
+            src={
+              urlFor(value)
+                //.width(320).height(240)
+                .fit("max")
+                .auto("format")
+                .toString() // Trying out because of typing for img
+            }
+          />
+          {value.caption && <figcaption>{value.caption}</figcaption>}
+        </figure>
       );
     },
   },

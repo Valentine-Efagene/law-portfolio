@@ -34,7 +34,8 @@
   width: min(100%, var(--secondary-max-width));
 }
 
-.mainImageCaption{
+.mainImageCaption,
+.bodyFigure figcaption {
   margin-top: 1rem;
   color: rgb(82, 82, 82);
 }
@@ -137,6 +138,7 @@
   margin-inline: auto;
 }
 
+.bodyFigure,
 .bodyImage {
   margin-block: 1rem;
   width: min(100%, var(--max-width));
