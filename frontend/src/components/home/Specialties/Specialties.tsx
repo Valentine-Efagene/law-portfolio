@@ -1,7 +1,8 @@
+"use client";
+
 import styles from "./Specialties.module.css";
 
 import React from "react";
-import { object, string } from "prop-types";
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
 import useElementOnScreen from "@/hooks/useElementOnScreen";
 

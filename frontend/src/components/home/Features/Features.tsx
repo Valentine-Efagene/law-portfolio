@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import styles from "./Features.module.css";
+"use client";
 
+import styles from "./Features.module.css";
 import { Playfair_Display, Source_Sans_Pro, Rubik } from "next/font/google";
-import { string } from "prop-types";
 import useElementOnScreen from "@/hooks/useElementOnScreen";
 
 const playfairDisplay = Playfair_Display({ weight: "400", subsets: ["latin"] });
